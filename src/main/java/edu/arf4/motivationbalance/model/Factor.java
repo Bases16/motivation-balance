@@ -24,4 +24,8 @@ public class Factor {
     @Enumerated(EnumType.STRING)
     private FactorStatus status;
 
+
+    public String getName() {
+        return name;
+    }
 }
