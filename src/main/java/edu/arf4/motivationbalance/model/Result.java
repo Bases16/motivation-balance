@@ -31,7 +31,7 @@ public class Result {
     @CollectionTable(name = "estimations")
     @MapKeyJoinColumn(name = "factor_id")
     @Enumerated(EnumType.STRING)
-    @Column(name = "estimation", updatable = false)
+    @Column(name = "estim", updatable = false)
     private Map<Factor, Estimation> estimations = new HashMap<>();
 
 
