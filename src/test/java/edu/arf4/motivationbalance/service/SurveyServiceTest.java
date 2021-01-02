@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -24,7 +25,6 @@ public class SurveyServiceTest {
     @Test
 //    @Transactional
     public void saveResult() {
-
         ResultDto resultDto = new ResultDto();
         Map<String, String> factorNameToEstimMap = new HashMap<>();
         factorNameToEstimMap.put("Scrum", "LIKE");
@@ -34,7 +34,14 @@ public class SurveyServiceTest {
         resultDto.setFactorNameToEstimMap(factorNameToEstimMap);
         resultDto.setEmployeeId(1L);
         Long newResultId = surveyService.saveResult(resultDto);
+    }
 
+    @Test
+    public void getAllResultsByEmpId() {
+
+        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsByEmpId(3L);
+
+        int x = 4;
 
     }
 }

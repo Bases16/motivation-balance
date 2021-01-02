@@ -48,22 +48,27 @@ public class SurveyService {
         return resultDao.saveResult(result);
     }
 
-    private ResultDto convertResultToResultDto(Result result) {
-        ResultDto dto = new ResultDto();
-        dto.setEmployeeId(result.getEmployee().getId());
-        dto.setPassingDatetime(result.getPassingDatetime());
-
-
-
-        return null;
-    }
-
+    @Transactional(readOnly = true)
     public List<ResultDto> getAllResultsByEmpId(Long empId) {
 
         List<Result> results = resultDao.getAllResultsByEmpId(empId);
         List<ResultDto> resultDtoList = new ArrayList<>();
         results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
         return resultDtoList;
+    }
+
+    private ResultDto convertResultToResultDto(Result result) {
+        ResultDto dto = new ResultDto();
+        dto.setEmployeeId(result.getEmployee().getId()); // нет запроса к бд
+        dto.setPassingDatetime(result.getPassingDatetime());
+
+        Map<Factor, Estimation> estimations = result.getEstimations();
+        Map<String, String> estimationsDto = new HashMap<>();
+        estimations.forEach((factor, estim) ->
+            estimationsDto.put(factor.getName(), estim.name())
+        );
+        dto.setFactorNameToEstimMap(estimationsDto);
+        return dto;
     }
 
 

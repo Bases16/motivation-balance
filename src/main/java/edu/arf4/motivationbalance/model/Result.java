@@ -36,6 +36,7 @@ public class Result {
     @JoinColumn(name = "emp_id")
     private Employee employee;
     @ElementCollection(fetch = FetchType.LAZY)
+//    @org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     @CollectionTable(name = "estimations")
     @MapKeyJoinColumn(name = "factor_id")
     @Enumerated(EnumType.STRING)
