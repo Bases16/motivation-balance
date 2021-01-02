@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface FactorDao {
     List<Factor> getRelevantFactors();
+    Factor getFactorByName(String name);
 }

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@ComponentScan("edu.arf4.motivationbalance.controller")
+@ComponentScan("edu.arf4.motivationbalance.rest")
 @EnableWebMvc
 @PropertySource("classpath:custom_app.properties")
 public class WebConfig implements WebMvcConfigurer {
@@ -22,21 +22,11 @@ public class WebConfig implements WebMvcConfigurer {
     public static String origin;
 
 
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/view/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
-
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(origin, "http://localhost:63342");
-//                .allowedMethods("GET", "DELETE");
+                .allowedOrigins(origin, "http://localhost:63342")
+                .allowedMethods("GET", "POST", "DELETE");
     }
 
 }

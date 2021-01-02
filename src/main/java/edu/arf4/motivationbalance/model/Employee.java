@@ -21,8 +21,7 @@ public class Employee {
     private String firstName;
     @NotNull
     private String lastName;
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "emp_id")
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
     private Set<Result> results = new HashSet<>();
     @OneToMany
     @JoinColumn(name = "manager_id")

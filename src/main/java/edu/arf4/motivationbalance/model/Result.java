@@ -8,8 +8,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,14 +30,28 @@ public class Result {
     @NotNull
     @Column(updatable = false)
     private LocalDateTime passingDatetime;
-    @ElementCollection
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "emp_id")
+    private Employee employee;
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "estimations")
     @MapKeyJoinColumn(name = "factor_id")
     @Enumerated(EnumType.STRING)
     @Column(name = "estim", updatable = false)
     private Map<Factor, Estimation> estimations = new HashMap<>();
 
+    protected Result() {}
 
+    public Result(Employee employee, LocalDateTime passingDatetime) {
+        this.passingDatetime = passingDatetime;
+        this.employee = employee;
+    }
 
-
+    public Long getId() {
+        return id;
+    }
+    public void setEstimations(Map<Factor, Estimation> estimations) {
+        this.estimations = estimations;
+    }
 }

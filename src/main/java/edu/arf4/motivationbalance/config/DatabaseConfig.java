@@ -19,9 +19,10 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-
-//for testing
-@ComponentScan(value = "edu.arf4.motivationbalance.dao", lazyInit = true)
+@ComponentScan(value = { "edu.arf4.motivationbalance.dao",
+                         "edu.arf4.motivationbalance.model",
+                         "edu.arf4.motivationbalance.service"  }, lazyInit = true
+)
 public class DatabaseConfig {
 
     private final Properties hibernateJpaProperties;
