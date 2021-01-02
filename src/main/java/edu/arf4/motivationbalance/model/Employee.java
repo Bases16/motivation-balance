@@ -27,4 +27,44 @@ public class Employee {
     @JoinColumn(name = "manager_id")
     private Set<Employee> subordinates = new HashSet<>();
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Set<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(Set<Result> results) {
+        this.results = results;
+    }
+
+    public Set<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public void setSubordinates(Set<Employee> subordinates) {
+        this.subordinates = subordinates;
+    }
 }

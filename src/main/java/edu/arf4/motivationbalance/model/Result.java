@@ -30,6 +30,7 @@ public class Result {
     @NotNull
     @Column(updatable = false)
     private LocalDateTime passingDatetime;
+    private Boolean isRelevant = true;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
@@ -53,5 +54,25 @@ public class Result {
     }
     public void setEstimations(Map<Factor, Estimation> estimations) {
         this.estimations = estimations;
+    }
+
+    public void setRelevant(Boolean relevant) {
+        isRelevant = relevant;
+    }
+
+    public LocalDateTime getPassingDatetime() {
+        return passingDatetime;
+    }
+
+    public Boolean getRelevant() {
+        return isRelevant;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public Map<Factor, Estimation> getEstimations() {
+        return estimations;
     }
 }

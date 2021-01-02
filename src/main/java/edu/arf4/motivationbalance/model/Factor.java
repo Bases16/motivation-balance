@@ -22,10 +22,28 @@ public class Factor {
     private String name;
     @NotNull
     @Enumerated(EnumType.STRING)
-    private FactorStatus status;
+    private FactorStatus status = FactorStatus.ACTIVE;
+
+    protected Factor() {}
+
+    public Factor(String name) {
+        this.name = name;
+    }
 
 
+    public Long getId() {
+        return id;
+    }
     public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public FactorStatus getStatus() {
+        return status;
+    }
+    public void setStatus(FactorStatus status) {
+        this.status = status;
     }
 }

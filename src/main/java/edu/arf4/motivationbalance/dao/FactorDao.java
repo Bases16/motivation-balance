@@ -1,10 +1,13 @@
 package edu.arf4.motivationbalance.dao;
 
 import edu.arf4.motivationbalance.model.Factor;
+import edu.arf4.motivationbalance.model.Result;
 
 import java.util.List;
 
 public interface FactorDao {
     List<Factor> getRelevantFactors();
+    List<Factor> getAllFactors();
     Factor getFactorByName(String name);
+    Long createFactor(Factor factor);
 }

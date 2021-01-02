@@ -23,6 +23,14 @@ public class FactorDaoImpl implements FactorDao {
     }
 
     @Override
+    public List<Factor> getAllFactors() {
+        String query = "SELECT fr FROM Factor fr";
+        List<Factor> factors = null;
+        factors = em.createQuery(query, Factor.class).getResultList();
+        return factors;
+    }
+
+    @Override
     public Factor getFactorByName(String name) {
         String query = "SELECT fr FROM Factor fr WHERE fr.name = :name";
         // todo OPTIONAL??
@@ -30,6 +38,12 @@ public class FactorDaoImpl implements FactorDao {
                 .setParameter("name", name)
                 .getSingleResult();
         return factor;
+    }
+
+    @Override
+    public Long createFactor(Factor factor) {
+        em.persist(factor);
+        return factor.getId();
     }
 
 
