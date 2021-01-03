@@ -1,10 +1,10 @@
 package edu.arf4.motivationbalance.service;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
-import edu.arf4.motivationbalance.dao.FactorDao;
 import edu.arf4.motivationbalance.dao.ResultDao;
+import edu.arf4.motivationbalance.dto.EstimationPairDto;
 import edu.arf4.motivationbalance.dto.ResultDto;
-import edu.arf4.motivationbalance.model.Factor;
+import edu.arf4.motivationbalance.model.EstimationPair;
 import edu.arf4.motivationbalance.model.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,19 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.jta.JtaTransactionManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -37,22 +31,18 @@ public class SurveyServiceTest {
     @Autowired
     private ResultDao resultDao;
 
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
-    @Autowired
-    JtaTransactionManager txManager;
 
     @Test
-//    @Transactional
+    @Transactional
     public void saveResult() {
         ResultDto resultDto = new ResultDto();
-        Map<String, String> factorNameToEstimMap = new HashMap<>();
-        factorNameToEstimMap.put("Scrum", "LIKE");
-        factorNameToEstimMap.put("PP", "NOT_LIKE");
-        factorNameToEstimMap.put("Gym", "NEUTRAL");
-
-        resultDto.setFactorNameToEstimMap(factorNameToEstimMap);
+        List<EstimationPairDto> estimationDtoPairs = new ArrayList<>();
+        estimationDtoPairs.add(new EstimationPairDto("Scrum", "LIKE"));
+        estimationDtoPairs.add(new EstimationPairDto("PP", "NOT_LIKE"));
+        estimationDtoPairs.add(new EstimationPairDto("Gym", "NEUTRAL"));
+        resultDto.setEstimationDtoPairs(estimationDtoPairs);
         resultDto.setEmployeeId(1L);
 
         Long newResultId = surveyService.saveResult(resultDto);
@@ -60,19 +50,38 @@ public class SurveyServiceTest {
         Result newResult = resultDao.getResultById(newResultId);
 
         assertEquals(resultDto.getEmployeeId(), newResult.getEmployee().getId());
-        assertEquals(resultDto.getPassingDatetime(), newResult.getPassingDatetime());
-//        assertEquals(resultDto.get(), newResult.getEmployee().getId());
-
-
-
+        assertTrue(newResult.isRelevant());
+        Set<EstimationPair> estimPairs = newResult.getEstimationPairs();
+        assertEquals(3, estimPairs.size());
     }
-
-
 
     @Test
     public void getAllResultsByEmpId() {
-        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsDtoByEmpId(3L);
-        int x = 4;
+        final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        final Long EMP_ID = 3L;
+
+        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsDtoByEmpId(EMP_ID);
+        assertNotNull(allResultsByEmpId);
+        assertEquals(2, allResultsByEmpId.size());
+
+        ResultDto dto1 = allResultsByEmpId.get(0);
+        assertEquals(EMP_ID, dto1.getEmployeeId());
+        assertEquals("2019-12-20 12:00", dto1.getPassingDatetime().format(DTF));
+        List<EstimationPairDto> dto1Pairs = dto1.getEstimationDtoPairs();
+        assertEquals(4, dto1Pairs.size());
+        assertTrue(dto1Pairs.contains(new EstimationPairDto("Scrum", "NEUTRAL")));
+        assertTrue(dto1Pairs.contains(new EstimationPairDto("PP", "LIKE")));
+        assertTrue(dto1Pairs.contains(new EstimationPairDto("Free Coffee", "LIKE")));
+        assertTrue(dto1Pairs.contains(new EstimationPairDto("Gym", "NOT_LIKE")));
+
+        ResultDto dto2 = allResultsByEmpId.get(1);
+        assertEquals(EMP_ID, dto2.getEmployeeId());
+        assertEquals("2020-12-20 14:00", dto2.getPassingDatetime().format(DTF));
+        List<EstimationPairDto> dto2Pairs = dto2.getEstimationDtoPairs();
+        assertEquals(3, dto2Pairs.size());
+        assertTrue(dto2Pairs.contains(new EstimationPairDto("Scrum", "NOT_LIKE")));
+        assertTrue(dto2Pairs.contains(new EstimationPairDto("PP", "NEUTRAL")));
+        assertTrue(dto2Pairs.contains(new EstimationPairDto("Gym", "LIKE")));
     }
 
 }

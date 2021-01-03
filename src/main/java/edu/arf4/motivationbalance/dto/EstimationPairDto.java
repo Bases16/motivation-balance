@@ -1,29 +1,30 @@
 package edu.arf4.motivationbalance.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.arf4.motivationbalance.model.Factor;
-import edu.arf4.motivationbalance.model.enums.Estimation;
+import java.util.Objects;
 
 public class EstimationPairDto {
 
-    @JsonProperty
-    private Factor factor;
+    private String factorName;
+    private String estimation;
 
-    @JsonProperty
-    private Estimation estimation;
-
-
-
-    public Factor getFactor() {
-        return factor;
+    public EstimationPairDto(String factorName, String estimationVal) {
+        this.factorName = factorName;
+        this.estimation = estimationVal;
     }
-    public void setFactor(Factor factor) {
-        this.factor = factor;
+
+    public String getFactorName() { return factorName; }
+    public String getEstimation() { return estimation; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EstimationPairDto that = (EstimationPairDto) o;
+        return factorName.equals(that.factorName) && estimation.equals(that.estimation);
     }
-    public Estimation getEstimation() {
-        return estimation;
-    }
-    public void setEstimation(Estimation estimation) {
-        this.estimation = estimation;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(factorName, estimation);
     }
 }

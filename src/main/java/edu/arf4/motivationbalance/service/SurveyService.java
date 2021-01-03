@@ -3,6 +3,7 @@ package edu.arf4.motivationbalance.service;
 import edu.arf4.motivationbalance.dao.EmployeeDao;
 import edu.arf4.motivationbalance.dao.FactorDao;
 import edu.arf4.motivationbalance.dao.ResultDao;
+import edu.arf4.motivationbalance.dto.EstimationPairDto;
 import edu.arf4.motivationbalance.dto.ResultDto;
 import edu.arf4.motivationbalance.model.Employee;
 import edu.arf4.motivationbalance.model.EstimationPair;
@@ -14,10 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,17 +41,16 @@ public class SurveyService {
         prevRelevantResult.setRelevant(false);
 
         Result result = new Result(emp, LocalDateTime.now());
-        List<Factor> relevantFactors = factorDao.getRelevantFactors(); // to avoid excessive SELECT 's
-
+        List<Factor> relevantFactors = factorDao.getRelevantFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
-        dto.getFactorNameToEstimMap()
-                .forEach((factorName, estim) -> {
+        dto.getEstimationDtoPairs()
+                .forEach(dtoPair -> {
                     EstimationPair pair = new EstimationPair();
                     pair.setResult(result);
-                    pair.setFactor(getOptFactorByNameFromGivenList(factorName, relevantFactors)
-                            .orElseGet( () -> factorDao.getFactorByName(factorName) )
+                    pair.setFactor(getOptFactorByNameFromGivenList(dtoPair.getFactorName(), relevantFactors)
+                            .orElseGet( () -> factorDao.getFactorByName(dtoPair.getFactorName()) )
                     );
-                    pair.setEstim(Estimation.valueOf(estim));
+                    pair.setEstim(Estimation.valueOf(dtoPair.getEstimation()));
                     estimPairs.add(pair);
                 });
         result.setEstimationPairs(estimPairs);
@@ -76,26 +74,31 @@ public class SurveyService {
 
     private ResultDto convertResultToResultDto(Result result) {
         ResultDto dto = new ResultDto();
-        dto.setEmployeeId(result.getEmployee().getId()); // нет запроса к бд
+        dto.setEmployeeId(result.getEmployee().getId());
         dto.setPassingDatetime(result.getPassingDatetime());
 
         Set<EstimationPair> estimationPairs = result.getEstimationPairs();
-        Map<String, String> estimationsDto = new HashMap<>();
+        List<EstimationPairDto> estimDtoPairs = new ArrayList<>();
 
-        // subselect here load all EstimPair collections
-        // for List<Result> results= resultDao.getAllResultsByEmpId(empId);
-        estimationPairs.forEach((pair) -> estimationsDto.put(
-                pair.getFactor().getName(), // batch here for loaded EstimPairs
-                pair.getEstim().name()                      )
-        );
-        dto.setFactorNameToEstimMap(estimationsDto);
+        estimationPairs.forEach( (pair) -> estimDtoPairs.add(             // subselect here
+                new EstimationPairDto(pair.getFactor().getName(), pair.getEstim().name()) //batch here
+        ));
+        dto.setEstimationDtoPairs(estimDtoPairs);
         return dto;
     }
 
 
 
+    public List<ResultDto> getAllRelevResultsDtoByManagerId(Long id) {
+        return null;
+    }
+    public List<ResultDto> getAllRelevResultsDto() {
+        return null;
+    }
 
-    public List<ResultDto> getAllResultsDtoByManagerId(Long id) {
+
+    private List<ResultDto> getAllRelevResultsDtoByEmpIds(List<Long> ids) {
+
         String q = " select e.id from Employee e ";
         return null;
     }

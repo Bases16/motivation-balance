@@ -21,26 +21,8 @@ public class TestRestController {
     }
 
     @GetMapping("/dto")
-    public ResultDto getDto(Principal principal) {
-
-        ResultDto dto = new ResultDto();
-        dto.setPassingDatetime(LocalDateTime.now());
-        Map<String, String> map = new HashMap<>();
-        map.put("Scrum", "NEUTRAL");
-        map.put("Gym", "LIKE");
-        dto.setFactorNameToEstimMap(map);
-
-        return dto;
-    }
-
-    @GetMapping("/dto2")
-    public EstimationPairDto getDto2(Principal principal) {
-
-        EstimationPairDto dto = new EstimationPairDto();
-        dto.setEstimation(Estimation.LIKE);
-        dto.setFactor(new Factor("NEW FACTOR"));
-
-        return dto;
+    public String getDto(Principal principal) {
+        return "dto";
     }
 
 

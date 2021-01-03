@@ -54,30 +54,25 @@ public class Result {
         this.employee = employee;
     }
 
+
     public Long getId() {
         return id;
     }
-
     public void setRelevant(Boolean relevant) {
         isRelevant = relevant;
     }
-
     public LocalDateTime getPassingDatetime() {
         return passingDatetime;
     }
-
-    public Boolean getRelevant() {
+    public Boolean isRelevant() {
         return isRelevant;
     }
-
     public Employee getEmployee() {
         return employee;
     }
-
     public Set<EstimationPair> getEstimationPairs() {
         return estimationPairs;
     }
-
     public void setEstimationPairs(Set<EstimationPair> estimationPairs) {
         this.estimationPairs = estimationPairs;
     }
