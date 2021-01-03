@@ -1,8 +1,9 @@
 package edu.arf4.motivationbalance.service;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
-import edu.arf4.motivationbalance.dao.ResultDao;
+import edu.arf4.motivationbalance.dao.FactorDao;
 import edu.arf4.motivationbalance.dto.ResultDto;
+import edu.arf4.motivationbalance.model.Factor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,6 +21,7 @@ public class SurveyServiceTest {
 
     @Autowired
     private SurveyService surveyService;
+
 
     @Test
 //    @Transactional
@@ -33,6 +36,8 @@ public class SurveyServiceTest {
         resultDto.setEmployeeId(1L);
         Long newResultId = surveyService.saveResult(resultDto);
     }
+
+
 
     @Test
     public void getAllResultsByEmpId() {

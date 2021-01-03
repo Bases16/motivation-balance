@@ -1,6 +1,7 @@
 package edu.arf4.motivationbalance.model;
 
 import edu.arf4.motivationbalance.model.enums.Estimation;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,24 +11,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "estimation_pairs")
 public class EstimationPair {
 
     @Id
     @GeneratedValue(generator = "MY_ID_GENERATOR")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Factor factor;
-    @Enumerated(EnumType.STRING)
-    private Estimation estim;
-
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(updatable = false)
     private Result result;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Factor factor;
+    @Enumerated(EnumType.STRING)
+    private Estimation estim;
 
 
 

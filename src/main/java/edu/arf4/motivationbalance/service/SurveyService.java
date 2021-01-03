@@ -12,13 +12,13 @@ import edu.arf4.motivationbalance.model.enums.Estimation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.enterprise.inject.New;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -34,70 +34,40 @@ public class SurveyService {
         this.employeeDao = employeeDao;
     }
 
+
     @Transactional
     public Long saveResult(ResultDto dto) {
         Employee emp = employeeDao.getEmployeeById(dto.getEmployeeId(), true);
         Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmployeeId());
         prevRelevantResult.setRelevant(false);
-        Result result = new Result(emp, LocalDateTime.now());
-
-    // обращение к бд каждый раз за фактором по имени, зато не будет ошибки, если удалить фактор во время заполнения
-        Map<Factor, Estimation> estimations = new HashMap<>();
-        dto.getFactorNameToEstimMap()
-                .forEach((factorName, estim) -> estimations.put(
-                        factorDao.getFactorByName(factorName),
-                        Estimation.valueOf(estim)              )
-        );
-        result.setEstimations(estimations);
-        return resultDao.saveResult(result);
-    }
-
-    @Transactional
-    public Long saveResult2(ResultDto dto) {
-        Employee emp = employeeDao.getEmployeeById(dto.getEmployeeId(), true);
-        Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmployeeId());
-        prevRelevantResult.setRelevant(false);
 
         Result result = new Result(emp, LocalDateTime.now());
-        // обращение к бд каждый раз за фактором по имени, зато не будет ошибки, если удалить фактор во время заполнения
-        Map<Factor, Estimation> estimations = new HashMap<>();
-        dto.getFactorNameToEstimMap()
-                .forEach((factorName, estim) -> estimations.put(
-                        factorDao.getFactorByName(factorName),
-                        Estimation.valueOf(estim)              )
-                );
-        result.setEstimations(estimations);
+        List<Factor> relevantFactors = factorDao.getRelevantFactors(); // to avoid excessive SELECT 's
 
         Set<EstimationPair> estimPairs = new HashSet<>();
         dto.getFactorNameToEstimMap()
                 .forEach((factorName, estim) -> {
                     EstimationPair pair = new EstimationPair();
                     pair.setResult(result);
-                    pair.setFactor(factorDao.getFactorByName(factorName));
+                    pair.setFactor(getOptFactorByNameFromGivenList(factorName, relevantFactors)
+                            .orElseGet( () -> factorDao.getFactorByName(factorName) )
+                    );
                     pair.setEstim(Estimation.valueOf(estim));
+                    estimPairs.add(pair);
                 });
         result.setEstimationPairs(estimPairs);
-
         return resultDao.saveResult(result);
     }
 
-
-    @Transactional(readOnly = true)
-    public List<ResultDto> getAllResultsDtoByEmpId2(Long empId) {
-
-        List<Result> results = resultDao.getAllResultsByEmpId(empId);
-        List<ResultDto> resultDtoList = new ArrayList<>();
-        results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
-
-
-
-
-        return resultDtoList;
+    private Optional<Factor> getOptFactorByNameFromGivenList(String factorName, List<Factor> factors) {
+        return factors.stream()
+                .filter(f -> f.getName().equals(factorName))
+                .findFirst();
     }
+
 
     @Transactional(readOnly = true)
     public List<ResultDto> getAllResultsDtoByEmpId(Long empId) {
-
         List<Result> results = resultDao.getAllResultsByEmpId(empId);
         List<ResultDto> resultDtoList = new ArrayList<>();
         results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
@@ -109,10 +79,14 @@ public class SurveyService {
         dto.setEmployeeId(result.getEmployee().getId()); // нет запроса к бд
         dto.setPassingDatetime(result.getPassingDatetime());
 
-        Map<Factor, Estimation> estimations = result.getEstimations();
+        Set<EstimationPair> estimationPairs = result.getEstimationPairs();
         Map<String, String> estimationsDto = new HashMap<>();
-        estimations.forEach((factor, estim) ->
-            estimationsDto.put(factor.getName(), estim.name())
+
+        // subselect here load all EstimPair collections
+        // for List<Result> results= resultDao.getAllResultsByEmpId(empId);
+        estimationPairs.forEach((pair) -> estimationsDto.put(
+                pair.getFactor().getName(), // batch here for loaded EstimPairs
+                pair.getEstim().name()                      )
         );
         dto.setFactorNameToEstimMap(estimationsDto);
         return dto;
@@ -120,10 +94,9 @@ public class SurveyService {
 
 
 
+
     public List<ResultDto> getAllResultsDtoByManagerId(Long id) {
-
         String q = " select e.id from Employee e ";
-
         return null;
     }
 

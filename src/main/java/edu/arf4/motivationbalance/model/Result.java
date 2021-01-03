@@ -1,7 +1,10 @@
 package edu.arf4.motivationbalance.model;
 
 import edu.arf4.motivationbalance.model.enums.Estimation;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -38,16 +41,9 @@ public class Result {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employee employee;
-    @ElementCollection(fetch = FetchType.LAZY)
-//    @org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
-    @CollectionTable(name = "estimations")
-    @MapKeyJoinColumn(name = "factor_id")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estim", updatable = false)
-    private Map<Factor, Estimation> estimations = new HashMap<>();
 
-
-    @OneToMany(mappedBy = "result")
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "result", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<EstimationPair> estimationPairs = new HashSet<>();
 
 
@@ -60,9 +56,6 @@ public class Result {
 
     public Long getId() {
         return id;
-    }
-    public void setEstimations(Map<Factor, Estimation> estimations) {
-        this.estimations = estimations;
     }
 
     public void setRelevant(Boolean relevant) {
@@ -79,10 +72,6 @@ public class Result {
 
     public Employee getEmployee() {
         return employee;
-    }
-
-    public Map<Factor, Estimation> getEstimations() {
-        return estimations;
     }
 
     public Set<EstimationPair> getEstimationPairs() {
