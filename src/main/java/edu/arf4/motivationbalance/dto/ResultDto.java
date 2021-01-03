@@ -15,6 +15,7 @@ public class ResultDto {
     @JsonSerialize(converter = LocalDateTimeStringConverter.class)
     @JsonDeserialize(converter = StringLocalDateTimeConverter.class) // todo  do i even need it ??
     private LocalDateTime passingDatetime;
+
     @JsonProperty("estimations")
     private Map<String, String> factorNameToEstimMap;
 

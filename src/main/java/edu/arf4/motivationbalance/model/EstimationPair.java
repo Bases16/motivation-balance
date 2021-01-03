@@ -20,12 +20,9 @@ public class EstimationPair {
     @Id
     @GeneratedValue(generator = "MY_ID_GENERATOR")
     private Long id;
-
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(updatable = false)
     private Result result;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Factor factor;
     @Enumerated(EnumType.STRING)

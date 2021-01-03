@@ -14,11 +14,11 @@ public class ResultDaoImpl implements ResultDao {
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
 
-    // todo  to test class with own EMF ??
-    @Override
+    @Override     // todo  to test class with own EMF ??
     public Result getResultById(Long id) {
-        return null;
+        return em.find(Result.class, id);
     }
+
 
     @Override
     public Result getRelevantResultByEmpId(Long empId) {
