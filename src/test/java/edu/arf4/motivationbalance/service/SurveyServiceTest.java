@@ -1,19 +1,17 @@
 package edu.arf4.motivationbalance.service;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
+import edu.arf4.motivationbalance.dao.ResultDao;
 import edu.arf4.motivationbalance.dto.ResultDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,10 +36,8 @@ public class SurveyServiceTest {
 
     @Test
     public void getAllResultsByEmpId() {
-
-        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsByEmpId(3L);
-
+        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsDtoByEmpId(3L);
         int x = 4;
-
     }
+
 }

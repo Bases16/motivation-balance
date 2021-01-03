@@ -14,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "results")
@@ -42,6 +45,11 @@ public class Result {
     @Enumerated(EnumType.STRING)
     @Column(name = "estim", updatable = false)
     private Map<Factor, Estimation> estimations = new HashMap<>();
+
+
+    @OneToMany(mappedBy = "result")
+    private Set<EstimationPair> estimationPairs = new HashSet<>();
+
 
     protected Result() {}
 
@@ -75,5 +83,13 @@ public class Result {
 
     public Map<Factor, Estimation> getEstimations() {
         return estimations;
+    }
+
+    public Set<EstimationPair> getEstimationPairs() {
+        return estimationPairs;
+    }
+
+    public void setEstimationPairs(Set<EstimationPair> estimationPairs) {
+        this.estimationPairs = estimationPairs;
     }
 }

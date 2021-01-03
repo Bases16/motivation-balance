@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ResultDaoImpl implements ResultDao {
@@ -43,6 +44,9 @@ public class ResultDaoImpl implements ResultDao {
                 .setParameter("empId", empId)
                 .getResultList();
     }
+
+
+
 
 
 }
