@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MySimpleTests {
 
-    @Test
+//    @Test
     public void test() {
         System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm")));
     }

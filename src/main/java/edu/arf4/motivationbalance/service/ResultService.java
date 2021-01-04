@@ -21,13 +21,13 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class SurveyService {
+public class ResultService {
 
     private final FactorDao factorDao;
     private final ResultDao resultDao;
     private final EmployeeDao employeeDao;
 
-    public SurveyService(FactorDao factorDao, ResultDao resultDao, EmployeeDao employeeDao) {
+    public ResultService(FactorDao factorDao, ResultDao resultDao, EmployeeDao employeeDao) {
         this.factorDao = factorDao;
         this.resultDao = resultDao;
         this.employeeDao = employeeDao;
@@ -36,7 +36,7 @@ public class SurveyService {
 
     @Transactional
     public Long saveResult(ResultDto dto) {
-        Employee emp = employeeDao.getEmployeeById(dto.getEmployeeId(), true);
+        Employee emp = employeeDao.getEmpById(dto.getEmployeeId(), true);
         Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmployeeId());
         prevRelevantResult.setRelevant(false);
 
@@ -88,19 +88,26 @@ public class SurveyService {
     }
 
 
-
-    public List<ResultDto> getAllRelevResultsDtoByManagerId(Long id) {
-        return null;
-    }
+    @Transactional(readOnly = true)
     public List<ResultDto> getAllRelevResultsDto() {
-        return null;
+        List<Long> allEmpIds = employeeDao.getAllEmpIds();
+        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(allEmpIds);
+        return resultsDto;
     }
 
+    @Transactional(readOnly = true)
+    public List<ResultDto> getAllRelevResultsDtoByManagerId(Long manId) {
+        List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(manId);
+        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(subordinatesIds);
+        return resultsDto;
+    }
 
+    // TODO не выдаются рез-ты сотрудников, которые еще не прошли тест (сопоставить на фронте?)
     private List<ResultDto> getAllRelevResultsDtoByEmpIds(List<Long> ids) {
-
-        String q = " select e.id from Employee e ";
-        return null;
+        List<Result> results = resultDao.getAllRelevResultsByEmpIds(ids);
+        List<ResultDto> resultDtoList = new ArrayList<>();
+        results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
+        return resultDtoList;
     }
 
 

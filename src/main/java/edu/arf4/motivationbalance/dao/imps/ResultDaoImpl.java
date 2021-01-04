@@ -44,8 +44,16 @@ public class ResultDaoImpl implements ResultDao {
                 .getResultList();
     }
 
+    @Override
+    public List<Result> getAllRelevResultsByEmpIds(List<Long> ids) {
 
+        List<Result> results = em
+                .createQuery("SELECT rs FROM Result rs WHERE rs.isRelevant = true AND rs.employee.id IN :ids")
+                .setParameter("ids", ids)
+                .getResultList();
 
+        return results;
+    }
 
 
 }

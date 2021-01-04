@@ -10,4 +10,5 @@ public interface ResultDao {
     Result getRelevantResultByEmpId(Long empId);
     Long saveResult(Result result);
     List<Result> getAllResultsByEmpId(Long empId);
+    List<Result> getAllRelevResultsByEmpIds(List<Long> ids);
 }

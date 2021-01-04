@@ -5,6 +5,9 @@ import edu.arf4.motivationbalance.model.Factor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FactorService {
 
@@ -26,6 +29,15 @@ public class FactorService {
         factor.setStatus(factor.getStatus().getOpposite());
     }
 
+    @Transactional(readOnly = true)
+    public List<String> getAllFactorNames() {
+        List<Factor> allFactors = factorDao.getAllFactors();
+        return allFactors.stream().map(Factor::getName).collect(Collectors.toList());
+    }
 
-
+    @Transactional(readOnly = true)
+    public List<String> getRelevFactorNames() {
+        List<Factor> relevFactors = factorDao.getRelevantFactors();
+        return relevFactors.stream().map(Factor::getName).collect(Collectors.toList());
+    }
 }

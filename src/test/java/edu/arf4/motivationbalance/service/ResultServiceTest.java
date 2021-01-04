@@ -24,10 +24,10 @@ import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class SurveyServiceTest {
+public class ResultServiceTest {
 
     @Autowired
-    private SurveyService surveyService;
+    private ResultService resultService;
     @Autowired
     private ResultDao resultDao;
 
@@ -45,7 +45,7 @@ public class SurveyServiceTest {
         resultDto.setEstimationDtoPairs(estimationDtoPairs);
         resultDto.setEmployeeId(1L);
 
-        Long newResultId = surveyService.saveResult(resultDto);
+        Long newResultId = resultService.saveResult(resultDto);
         em.flush();
         Result newResult = resultDao.getResultById(newResultId);
 
@@ -60,7 +60,7 @@ public class SurveyServiceTest {
         final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         final Long EMP_ID = 3L;
 
-        List<ResultDto> allResultsByEmpId = surveyService.getAllResultsDtoByEmpId(EMP_ID);
+        List<ResultDto> allResultsByEmpId = resultService.getAllResultsDtoByEmpId(EMP_ID);
         assertNotNull(allResultsByEmpId);
         assertEquals(2, allResultsByEmpId.size());
 
@@ -83,5 +83,25 @@ public class SurveyServiceTest {
         assertTrue(dto2Pairs.contains(new EstimationPairDto("PP", "NEUTRAL")));
         assertTrue(dto2Pairs.contains(new EstimationPairDto("Gym", "LIKE")));
     }
+
+    @Test
+    public void getAllRelevResultsDto() {
+        List<ResultDto> dtos = resultService.getAllRelevResultsDto();
+        assertNotNull(dtos);
+        assertEquals(4, dtos.size());
+    }
+
+    @Test
+    public void getAllRelevResultsDtoByManagerId() {
+        List<ResultDto> dtos = resultService.getAllRelevResultsDtoByManagerId(1L);
+        assertNotNull(dtos);
+        assertEquals(2, dtos.size());
+
+        dtos = resultService.getAllRelevResultsDtoByManagerId(2L);
+        assertNotNull(dtos);
+        assertEquals(1, dtos.size());
+
+    }
+
 
 }
