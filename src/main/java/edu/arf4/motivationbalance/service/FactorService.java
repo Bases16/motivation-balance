@@ -36,8 +36,8 @@ public class FactorService {
     }
 
     @Transactional(readOnly = true)
-    public List<String> getRelevFactorNames() {
-        List<Factor> relevFactors = factorDao.getRelevantFactors();
-        return relevFactors.stream().map(Factor::getName).collect(Collectors.toList());
+    public List<String> getActiveFactorNames() {
+        List<Factor> activeFactors = factorDao.getActiveFactors();
+        return activeFactors.stream().map(Factor::getName).collect(Collectors.toList());
     }
 }

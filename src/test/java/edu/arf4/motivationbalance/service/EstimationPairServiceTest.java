@@ -20,13 +20,10 @@ public class EstimationPairServiceTest {
     private EstimationPairService estimationPairService;
 
     @Test
-    public void getRelevEstimDtoPairsByFactorName() {
-        List<EstimationPairDto> pairsDto = estimationPairService.getRelevEstimDtoPairsByFactorName("PP");
+    public void getRelevEstimDtoPairsByAllActiveFactors() {
+        List<EstimationPairDto> pairsDto = estimationPairService.getRelevEstimDtoPairsByAllActiveFactors();
         assertNotNull(pairsDto);
-        assertEquals(4, pairsDto.size());
+        assertEquals(12, pairsDto.size());
 
-        pairsDto = estimationPairService.getRelevEstimDtoPairsByFactorName("Free Coffee");
-        assertNotNull(pairsDto);
-        assertEquals(0, pairsDto.size());
     }
 }

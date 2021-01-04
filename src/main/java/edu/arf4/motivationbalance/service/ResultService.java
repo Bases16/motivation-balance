@@ -41,7 +41,7 @@ public class ResultService {
         prevRelevantResult.setRelevant(false);
 
         Result result = new Result(emp, LocalDateTime.now());
-        List<Factor> relevantFactors = factorDao.getRelevantFactors(); // to avoid excessive SELECT's
+        List<Factor> relevantFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
         dto.getEstimationDtoPairs()
                 .forEach(dtoPair -> {

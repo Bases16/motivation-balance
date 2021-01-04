@@ -15,7 +15,7 @@ public class FactorDaoImpl implements FactorDao {
     private EntityManager em;
 
     @Override
-    public List<Factor> getRelevantFactors() {
+    public List<Factor> getActiveFactors() {
         String query = "SELECT fr FROM Factor fr WHERE fr.status = 'ACTIVE' ";
         List<Factor> factors = null;
         factors = em.createQuery(query, Factor.class).getResultList();

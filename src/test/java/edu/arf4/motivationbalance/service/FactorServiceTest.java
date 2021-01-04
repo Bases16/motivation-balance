@@ -27,9 +27,9 @@ public class FactorServiceTest {
         assertNotNull(allFactorNames);
         assertEquals(4, allFactorNames.size());
 
-        List<String> relevFactorNames = factorService.getRelevFactorNames();
-        assertNotNull(relevFactorNames);
-        assertEquals(3, relevFactorNames.size());
+        List<String> activeFactorNames = factorService.getActiveFactorNames();
+        assertNotNull(activeFactorNames);
+        assertEquals(3, activeFactorNames.size());
 
         String NEW_FACTOR_NAME = "NEW FACTOR";
         factorService.createNewFactor(NEW_FACTOR_NAME);
@@ -37,16 +37,16 @@ public class FactorServiceTest {
         allFactorNames = factorService.getAllFactorNames();
         assertEquals(5, allFactorNames.size());
 
-        relevFactorNames = factorService.getRelevFactorNames();
-        assertEquals(4, relevFactorNames.size());
+        activeFactorNames = factorService.getActiveFactorNames();
+        assertEquals(4, activeFactorNames.size());
 
         factorService.changeFactorStatus(NEW_FACTOR_NAME);
 
         allFactorNames = factorService.getAllFactorNames();
         assertEquals(5, allFactorNames.size());
 
-        relevFactorNames = factorService.getRelevFactorNames();
-        assertEquals(3, relevFactorNames.size());
+        activeFactorNames = factorService.getActiveFactorNames();
+        assertEquals(3, activeFactorNames.size());
     }
 
 }

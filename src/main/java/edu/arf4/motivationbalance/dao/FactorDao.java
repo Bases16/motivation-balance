@@ -6,7 +6,7 @@ import edu.arf4.motivationbalance.model.Result;
 import java.util.List;
 
 public interface FactorDao {
-    List<Factor> getRelevantFactors();
+    List<Factor> getActiveFactors();
     List<Factor> getAllFactors();
     Factor getFactorByName(String name);
     Long createFactor(Factor factor);

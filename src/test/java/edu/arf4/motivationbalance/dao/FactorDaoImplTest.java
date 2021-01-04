@@ -21,10 +21,10 @@ public class FactorDaoImplTest {
     private FactorDao factorDao;
 
     @Test
-    public void getRelevantFactors() {
-        List<Factor> relevantFactors = factorDao.getRelevantFactors();
-        assertNotNull(relevantFactors);
-        assertEquals(3, relevantFactors.size());
+    public void getActiveFactors() {
+        List<Factor> activeFactors = factorDao.getActiveFactors();
+        assertNotNull(activeFactors);
+        assertEquals(3, activeFactors.size());
     }
 
     @Test
