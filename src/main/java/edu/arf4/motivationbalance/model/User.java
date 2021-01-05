@@ -25,7 +25,7 @@ public class User {
     private Long id;
     @NotNull
     @Column(unique = true)
-    private String email;
+    private String username;
     @NotNull
     private String password;
     @NotNull
@@ -38,4 +38,48 @@ public class User {
     @JoinColumn(name = "emp_id", updatable = false, unique = true)
     private Employee employee;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }
