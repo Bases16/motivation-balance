@@ -20,9 +20,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 //        rootContext.scan("edu.arf4.motivationbalance");
 
 //        rootContext.register(WebConfig.class, SecurityConfig.class);
-//        rootContext.register(WebConfig.class, DatabaseConfig.class, SecurityConfig.class);
+        rootContext.register(WebConfig.class, DatabaseConfig.class, SecurityConfig.class);
 //        rootContext.register(WebConfig.class, DatabaseConfig.class);
-        rootContext.register(WebConfig.class);
+//        rootContext.register(WebConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
 

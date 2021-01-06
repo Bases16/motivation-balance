@@ -21,7 +21,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(value = { "edu.arf4.motivationbalance.dao",
                          "edu.arf4.motivationbalance.model",
-                         "edu.arf4.motivationbalance.service"  }, lazyInit = true
+                         "edu.arf4.motivationbalance.service" }, lazyInit = true
 )
 public class DatabaseConfig {
 

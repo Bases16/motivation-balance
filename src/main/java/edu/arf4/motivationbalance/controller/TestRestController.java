@@ -5,18 +5,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@RestController("/rest")
+@RestController
 public class TestRestController {
 
-    @GetMapping
+    @GetMapping("/rest")
     public String getHome() {
         return "<h2> WELCOME ON HOMEPAGE</h2>";
     }
 
-    @GetMapping("/dto")
+    @GetMapping("/rest/dto")
     public String getDto(Principal principal) {
         return "DTO";
     }
+
 
 
 }
