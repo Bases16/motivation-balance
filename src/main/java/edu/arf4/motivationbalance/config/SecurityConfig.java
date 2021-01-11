@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtConfigurer jwtConfigurer;
     private final UserDetailsService userDetailsService;
 
+
     public SecurityConfig(JwtConfigurer jwtConfigurer, UserDetailsService userDetailsService) {
         this.jwtConfigurer = jwtConfigurer;
         this.userDetailsService = userDetailsService;
@@ -34,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
-                .antMatchers("/", "/rest","/rest/**").permitAll()
+                .antMatchers("/", "/rest", "/rest/auth/login").permitAll()
+                .antMatchers("rest/admin").hasRole("ADMIN")
+                .antMatchers("rest/manager").hasAnyRole("ADMIN", "MANAGER")
                 .anyRequest()
                 .authenticated()
             .and()
@@ -56,9 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
-
-
-
 
 
 

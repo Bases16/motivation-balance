@@ -1,6 +1,7 @@
 package edu.arf4.motivationbalance.controller;
 
 import edu.arf4.motivationbalance.dto.AuthRequestDto;
+import edu.arf4.motivationbalance.dto.AuthResponseDto;
 import edu.arf4.motivationbalance.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody AuthRequestDto request) {
+    public ResponseEntity<AuthResponseDto> authenticate(@RequestBody AuthRequestDto request) {
         try {
             return ResponseEntity.ok(userService.authenticateUser(request));
         } catch (AuthenticationException e) {

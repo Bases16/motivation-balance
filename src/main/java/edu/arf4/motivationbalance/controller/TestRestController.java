@@ -15,9 +15,24 @@ public class TestRestController {
         return "<h2> WELCOME ON HOMEPAGE</h2>";
     }
 
-    @GetMapping("/dto")
-    public String getDto(Principal principal) {
-        return "DTO";
+    @GetMapping("/user")
+    public String userPage(Principal principal) {
+        return "USER";
+    }
+
+    @GetMapping("/spec")
+    public String specPage(Principal principal) {
+        return "SPEC";
+    }
+
+    @GetMapping("/manager")
+    public String managerPage(Principal principal) {
+        return "MANAGER";
+    }
+
+    @GetMapping("/admin")
+    public String adminPage(Principal principal) {
+        return "ADMIN";
     }
 
 
