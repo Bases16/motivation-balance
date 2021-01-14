@@ -5,7 +5,6 @@ public class RegisterUserDto {
     private String firstName;
     private String lastName;
     private String username;
-    private String email;
     private String password;
 
 
@@ -19,10 +18,6 @@ public class RegisterUserDto {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getPassword() {

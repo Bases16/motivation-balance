@@ -4,7 +4,10 @@ import edu.arf4.motivationbalance.dao.UserDao;
 import edu.arf4.motivationbalance.dto.AuthRequestDto;
 import edu.arf4.motivationbalance.dto.AuthResponseDto;
 import edu.arf4.motivationbalance.dto.RegisterUserDto;
+import edu.arf4.motivationbalance.model.Employee;
 import edu.arf4.motivationbalance.model.User;
+import edu.arf4.motivationbalance.model.enums.Role;
+import edu.arf4.motivationbalance.model.enums.UserStatus;
 import edu.arf4.motivationbalance.security.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,8 +50,21 @@ public class UserService {
     public void registerUser(RegisterUserDto dto) {
 
         if (userDao.findByUsername(dto.getUsername()) != null) {
-            throw new IllegalArgumentException(dto.getEmail()); // TODO
+            throw new IllegalArgumentException("user is already registered"); // TODO
         }
+
+        Employee employee = new Employee();
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+
+        User newUser = new User(employee);
+        newUser.setUsername(dto.getUsername());
+        newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
+        newUser.setRole(Role.SPECIALIST);
+        newUser.setStatus(UserStatus.ACTIVE);
+
+        userDao.createUser(newUser);
+
 
     }
 

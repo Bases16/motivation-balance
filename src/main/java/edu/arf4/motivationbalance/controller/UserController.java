@@ -2,6 +2,7 @@ package edu.arf4.motivationbalance.controller;
 
 import edu.arf4.motivationbalance.dto.AuthRequestDto;
 import edu.arf4.motivationbalance.dto.AuthResponseDto;
+import edu.arf4.motivationbalance.dto.RegisterUserDto;
 import edu.arf4.motivationbalance.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,11 @@ public class UserController {
             throw new BadCredentialsException("Invalid username/password combination");
 //            return new ResponseEntity<>("Invalid username/password combination", HttpStatus.FORBIDDEN);
         }
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody RegisterUserDto registerUserDto) {
+        userService.registerUser(registerUserDto);
     }
 
     @PostMapping("/logout")
