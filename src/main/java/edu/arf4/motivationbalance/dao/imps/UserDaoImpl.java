@@ -16,11 +16,11 @@ public class UserDaoImpl implements UserDao {
     private EntityManager em;
 
     @Override
-    public User findByUsername(String username) {
+    public User findByUsername(String email) {
         User user = null;
         try {
-            user = em.createQuery("SELECT u FROM User u WHERE u.username = :name", User.class)
-                     .setParameter("name", username)
+            user = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
+                     .setParameter("email", email)
                      .getSingleResult();
         } catch (NoResultException | NonUniqueResultException e) {
             e.printStackTrace();

@@ -14,15 +14,15 @@ INSERT INTO employees(id, first_name, last_name, manager_id) VALUES
 (6, 'SpecialistFN6', 'SpecialistLN6', 2),
 (7, 'BannedSpecFN7', 'BannedSpecLN7', 2);
 
-INSERT INTO users(id, emp_id, username, password, role, status) VALUES
+INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 (998, null, 'admin', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'ADMIN', 'ACTIVE'),
-(1, 1, 'manag1', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
-(2, 2, 'manag2', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
-(3, 3, 'spec3', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
-(4, 4, 'spec4', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
-(5, 5, 'spec5', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
-(6, 6, 'spec6', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
-(7, 7, 'bannedSpec7', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'BANNED');
+(1, 1, 'manag1@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
+(2, 2, 'manag2@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
+(3, 3, 'spec3@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
+(4, 4, 'spec4@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
+(5, 5, 'spec5@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
+(6, 6, 'spec6@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
+(7, 7, 'bannedSpec7@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'BANNED');
 
 
 INSERT INTO results(id, emp_id, is_relevant, passing_datetime) VALUES

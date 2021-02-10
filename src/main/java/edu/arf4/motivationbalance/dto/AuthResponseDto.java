@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthResponseDto {
     @JsonProperty
-    private String username;
+    private String email;
     @JsonProperty
     private String token;
 
-    public AuthResponseDto(String username, String token) {
-        this.username = username;
+    public AuthResponseDto(String email, String token) {
+        this.email = email;
         this.token = token;
     }
 }

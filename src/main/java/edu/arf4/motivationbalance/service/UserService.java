@@ -34,22 +34,22 @@ public class UserService {
     }
 
     public AuthResponseDto authenticateUser(AuthRequestDto request) {
-        String username = request.getUsername();
+        String email = request.getEmail();
         String password = request.getPassword();
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        User user = userDao.findByUsername(username);
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+        User user = userDao.findByUsername(email);
         if (user == null) {
-            throw new UsernameNotFoundException("User doesn't exists");
+            throw new UsernameNotFoundException("User doesn't exist");
         }
-        String token = jwtTokenProvider.createToken(username, user.getRole().name());
-        return new AuthResponseDto(username, token);
+        String token = jwtTokenProvider.createToken(email, user.getRole().name());
+        return new AuthResponseDto(email, token);
     }
 
 
     @Transactional
     public void registerUser(RegisterUserDto dto) {
 
-        if (userDao.findByUsername(dto.getUsername()) != null) {
+        if (userDao.findByUsername(dto.getEmail()) != null) {
             throw new IllegalArgumentException("user is already registered"); // TODO
         }
 
@@ -58,7 +58,7 @@ public class UserService {
         employee.setLastName(dto.getLastName());
 
         User newUser = new User(employee);
-        newUser.setUsername(dto.getUsername());
+        newUser.setEmail(dto.getEmail());
         newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
         newUser.setRole(Role.SPECIALIST);
         newUser.setStatus(UserStatus.ACTIVE);
