@@ -29,7 +29,7 @@ public class JwtTokenProvider {
     @Value("${jwt.header}")
     private String authHeader;
     @Value("${jwt.expiration}")
-    private long validityInMilliseconds;
+    private long validityInSeconds;
 
     public JwtTokenProvider(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -46,7 +46,7 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", role);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds * 1000);
+        Date validity = new Date(now.getTime() + validityInSeconds * 1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
