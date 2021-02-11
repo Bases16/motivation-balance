@@ -43,6 +43,4 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         return idList;
     }
-
-
 }

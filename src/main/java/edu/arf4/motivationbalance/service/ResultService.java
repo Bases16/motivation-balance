@@ -57,19 +57,41 @@ public class ResultService {
         return resultDao.saveResult(result);
     }
 
-    private Optional<Factor> getOptFactorByNameFromGivenList(String factorName, List<Factor> factors) {
-        return factors.stream()
-                .filter(f -> f.getName().equals(factorName))
-                .findFirst();
-    }
-
-
     @Transactional(readOnly = true)
     public List<ResultDto> getAllResultsDtoByEmpId(Long empId) {
         List<Result> results = resultDao.getAllResultsByEmpId(empId);
         List<ResultDto> resultDtoList = new ArrayList<>();
         results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
         return resultDtoList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ResultDto> getAllRelevResultsDto() {
+        List<Long> allEmpIds = employeeDao.getAllEmpIds();
+        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(allEmpIds);
+        return resultsDto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ResultDto> getAllRelevResultsDtoByManagerId(Long manId) {
+        List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(manId);
+        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(subordinatesIds);
+        return resultsDto;
+    }
+
+
+    // TODO не выдаются рез-ты сотрудников, которые еще не прошли тест (сопоставить на фронте?)
+    private List<ResultDto> getAllRelevResultsDtoByEmpIds(List<Long> ids) {
+        List<Result> results = resultDao.getAllRelevResultsByEmpIds(ids);
+        List<ResultDto> resultDtoList = new ArrayList<>();
+        results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
+        return resultDtoList;
+    }
+
+    private Optional<Factor> getOptFactorByNameFromGivenList(String factorName, List<Factor> factors) {
+        return factors.stream()
+                .filter(f -> f.getName().equals(factorName))
+                .findFirst();
     }
 
     private ResultDto convertResultToResultDto(Result result) {
@@ -86,30 +108,4 @@ public class ResultService {
         dto.setEstimationDtoPairs(estimDtoPairs);
         return dto;
     }
-
-
-    @Transactional(readOnly = true)
-    public List<ResultDto> getAllRelevResultsDto() {
-        List<Long> allEmpIds = employeeDao.getAllEmpIds();
-        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(allEmpIds);
-        return resultsDto;
-    }
-
-    @Transactional(readOnly = true)
-    public List<ResultDto> getAllRelevResultsDtoByManagerId(Long manId) {
-        List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(manId);
-        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(subordinatesIds);
-        return resultsDto;
-    }
-
-    // TODO не выдаются рез-ты сотрудников, которые еще не прошли тест (сопоставить на фронте?)
-    private List<ResultDto> getAllRelevResultsDtoByEmpIds(List<Long> ids) {
-        List<Result> results = resultDao.getAllRelevResultsByEmpIds(ids);
-        List<ResultDto> resultDtoList = new ArrayList<>();
-        results.forEach(r -> resultDtoList.add(convertResultToResultDto(r)));
-        return resultDtoList;
-    }
-
-
-
 }

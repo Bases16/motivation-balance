@@ -15,7 +15,7 @@ INSERT INTO employees(id, first_name, last_name, manager_id) VALUES
 (7, 'BannedSpecFN7', 'BannedSpecLN7', 2);
 
 INSERT INTO users(id, emp_id, email, password, role, status) VALUES
-(998, null, 'admin', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'ADMIN', 'ACTIVE'),
+(998, null, 'admin@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'ADMIN', 'ACTIVE'),
 (1, 1, 'manag1@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
 (2, 2, 'manag2@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
 (3, 3, 'spec3@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),

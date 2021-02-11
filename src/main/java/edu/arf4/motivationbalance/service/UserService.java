@@ -64,8 +64,5 @@ public class UserService {
         newUser.setStatus(UserStatus.ACTIVE);
 
         userDao.createUser(newUser);
-
-
     }
-
 }
