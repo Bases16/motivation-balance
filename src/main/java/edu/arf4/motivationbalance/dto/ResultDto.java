@@ -12,9 +12,9 @@ public class ResultDto {
 
     private Long employeeId;
     @JsonSerialize(converter = LocalDateTimeStringConverter.class)
-    @JsonDeserialize(converter = StringLocalDateTimeConverter.class) // todo  do i even need it ??
+    @JsonDeserialize(converter = StringLocalDateTimeConverter.class)
     private LocalDateTime passingDatetime;
-    private List<EstimationPairDto> estimationDtoPairs;
+    private List<EstimationPairDto> estimationPairs;
 
 
     public Long getEmployeeId() {
@@ -30,10 +30,10 @@ public class ResultDto {
         return passingDatetime;
     }
 
-    public List<EstimationPairDto> getEstimationDtoPairs() {
-        return estimationDtoPairs;
+    public List<EstimationPairDto> getEstimationPairs() {
+        return estimationPairs;
     }
-    public void setEstimationDtoPairs(List<EstimationPairDto> estimationDtoPairs) {
-        this.estimationDtoPairs = estimationDtoPairs;
+    public void setEstimationPairs(List<EstimationPairDto> estimationPairs) {
+        this.estimationPairs = estimationPairs;
     }
 }

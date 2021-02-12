@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeStringConverter extends StdConverter<LocalDateTime, String>
 {
-    static final String DATETIME_FORMAT = "yyyy-MM-dd' at 'HH:mm";
+    static final String DATETIME_FORMAT = "dd-MM-yyyy-HH:mm";
 
     @Override
     public String convert(LocalDateTime localDatetime) {

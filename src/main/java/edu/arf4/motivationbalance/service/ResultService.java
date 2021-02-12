@@ -43,7 +43,7 @@ public class ResultService {
         Result result = new Result(emp, LocalDateTime.now());
         List<Factor> relevantFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
-        dto.getEstimationDtoPairs()
+        dto.getEstimationPairs()
                 .forEach(dtoPair -> {
                     EstimationPair pair = new EstimationPair();
                     pair.setResult(result);
@@ -105,7 +105,7 @@ public class ResultService {
         estimationPairs.forEach( (pair) -> estimDtoPairs.add(             // subselect here
                 new EstimationPairDto(pair.getFactor().getName(), pair.getEstim().name()) //batch here
         ));
-        dto.setEstimationDtoPairs(estimDtoPairs);
+        dto.setEstimationPairs(estimDtoPairs);
         return dto;
     }
 }
