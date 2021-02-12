@@ -2,7 +2,9 @@ package edu.arf4.motivationbalance;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
 import edu.arf4.motivationbalance.dao.EmployeeDao;
+import edu.arf4.motivationbalance.dto.EmployeeDto;
 import edu.arf4.motivationbalance.model.Employee;
+import edu.arf4.motivationbalance.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,11 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MyTests {
 
-//    @Autowired
-//    private EmployeeDao employeeDao;
+    @Autowired
+    private EmployeeService employeeService;
     @Test
-    @Transactional
     public void test() {
+        List<EmployeeDto> dtos = employeeService.getEmployeesDtoByManagerId(1L);
+        int x = 9;
     }
 }

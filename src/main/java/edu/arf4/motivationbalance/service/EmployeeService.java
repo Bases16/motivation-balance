@@ -6,6 +6,7 @@ import edu.arf4.motivationbalance.model.Employee;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,14 +20,15 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    List<EmployeeDto> getEmployeesDtoByManagerId(Long managerId) {
-
+    public List<EmployeeDto> getEmployeesDtoByManagerId(Long managerId) {
         Employee manager = employeeDao.getEmpById(managerId, false);
         Set<Employee> subordinates = manager.getSubordinates();
 
-
-
-        return null;
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        subordinates.forEach(emp -> employeeDtos
+                .add(new EmployeeDto(emp.getId(), emp.getFirstName(), emp.getLastName())
+        ));
+        return employeeDtos;
     }
 
 

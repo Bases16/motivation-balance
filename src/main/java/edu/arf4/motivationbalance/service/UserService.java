@@ -33,6 +33,7 @@ public class UserService {
         this.authManager = authManager;
     }
 
+    @Transactional(readOnly = true)
     public AuthResponseDto authenticateUser(AuthRequestDto request) {
         String email = request.getEmail();
         String password = request.getPassword();
@@ -41,8 +42,11 @@ public class UserService {
         if (user == null) {
             throw new UsernameNotFoundException("User doesn't exist");
         }
+        Employee employee = user.getEmployee();
+        Long empId = employee != null ? employee.getId() : null;
+
         String token = jwtTokenProvider.createToken(email, user.getRole().name());
-        return new AuthResponseDto(email, token);
+        return new AuthResponseDto(empId, email, token);
     }
 
 
