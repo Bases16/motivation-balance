@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 @RestController
 @RequestMapping("/rest/results")
 public class ResultController {
@@ -22,8 +23,13 @@ public class ResultController {
         this.resultService = resultService;
     }
 
-    @PostMapping("/{id}")
-    public List<ResultDto> getAllResultDtoByEmpId(@PathVariable("id") Long empId) {
-        return resultService.getAllResultsDtoByEmpId(empId);
+//    @GetMapping("/{id}")
+//    public List<ResultDto> getAllResultDtoByEmpId(@PathVariable("id") Long empId) {
+//        return resultService.getAllResultsDtoByEmpId(empId);
+//    }
+
+    @GetMapping("/3")
+    public List<ResultDto> getAllResultDtoByEmpId() {
+        return resultService.getAllResultsDtoByEmpId(3L);
     }
 }
