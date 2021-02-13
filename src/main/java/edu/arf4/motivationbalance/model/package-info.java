@@ -4,11 +4,11 @@
         parameters = {
                 @org.hibernate.annotations.Parameter(
                         name = "sequence_name",
-                        value = "motivation_balance"
+                        value = "mot_bal_sequence"
                 ),
                 @org.hibernate.annotations.Parameter(
                         name = "initial_value",
-                        value = "999"
+                        value = "1000"
                 )
         })
 package edu.arf4.motivationbalance.model;
