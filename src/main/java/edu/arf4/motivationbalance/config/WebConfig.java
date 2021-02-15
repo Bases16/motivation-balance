@@ -16,8 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
-    @Value("${origin}")
-    private String origin;
+    @Value("${frontendAppOrigin}")
+    private String frontendAppOrigin;
 
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
@@ -25,9 +25,22 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins(origin)
-                .allowedMethods("GET", "POST", "DELETE")
+//        registry.addMapping("/**")
+//                .allowedOrigins(frontendAppOrigin)
+//                .allowedMethods("GET", "POST")
+//                .allowedHeaders("Authorization");
+
+        registry.addMapping("/rest/auth/login")
+                .allowedOrigins(frontendAppOrigin)
+                .allowedMethods("POST");
+
+        registry.addMapping("/rest/auth/register")
+                .allowedOrigins(frontendAppOrigin)
+                .allowedMethods("POST");
+
+        registry.addMapping("/rest/results/*")
+                .allowedOrigins(frontendAppOrigin)
+                .allowedMethods("GET")
                 .allowedHeaders("Authorization");
     }
 

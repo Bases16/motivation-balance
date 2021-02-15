@@ -43,13 +43,13 @@ public class ResultServiceTest {
         estimationDtoPairs.add(new EstimationPairDto("PP", "NOT_LIKE"));
         estimationDtoPairs.add(new EstimationPairDto("Gym", "NEUTRAL"));
         resultDto.setEstimationPairs(estimationDtoPairs);
-        resultDto.setEmployeeId(1L);
+        resultDto.setEmpId(1L);
 
         Long newResultId = resultService.saveResult(resultDto);
         em.flush();
         Result newResult = resultDao.getResultById(newResultId);
 
-        assertEquals(resultDto.getEmployeeId(), newResult.getEmployee().getId());
+        assertEquals(resultDto.getEmpId(), newResult.getEmployee().getId());
         assertTrue(newResult.isRelevant());
         Set<EstimationPair> estimPairs = newResult.getEstimationPairs();
         assertEquals(3, estimPairs.size());
@@ -65,8 +65,8 @@ public class ResultServiceTest {
         assertEquals(2, allResultsByEmpId.size());
 
         ResultDto dto1 = allResultsByEmpId.get(0);
-        assertEquals(EMP_ID, dto1.getEmployeeId());
-        assertEquals("2019-12-20 12:00", dto1.getPassingDatetime().format(DTF));
+        assertEquals(EMP_ID, dto1.getEmpId());
+        assertEquals("2019-12-20 12:00", dto1.getPassDatetime().format(DTF));
         List<EstimationPairDto> dto1Pairs = dto1.getEstimationPairs();
         assertEquals(4, dto1Pairs.size());
         assertTrue(dto1Pairs.contains(new EstimationPairDto("Scrum", "NEUTRAL")));
@@ -75,8 +75,8 @@ public class ResultServiceTest {
         assertTrue(dto1Pairs.contains(new EstimationPairDto("Gym", "NOT_LIKE")));
 
         ResultDto dto2 = allResultsByEmpId.get(1);
-        assertEquals(EMP_ID, dto2.getEmployeeId());
-        assertEquals("2020-12-20 14:00", dto2.getPassingDatetime().format(DTF));
+        assertEquals(EMP_ID, dto2.getEmpId());
+        assertEquals("2020-12-20 14:00", dto2.getPassDatetime().format(DTF));
         List<EstimationPairDto> dto2Pairs = dto2.getEstimationPairs();
         assertEquals(3, dto2Pairs.size());
         assertTrue(dto2Pairs.contains(new EstimationPairDto("Scrum", "NOT_LIKE")));

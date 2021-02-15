@@ -1,29 +1,21 @@
 package edu.arf4.motivationbalance.model;
 
-import edu.arf4.motivationbalance.model.enums.Estimation;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -35,7 +27,7 @@ public class Result {
     private Long id;
     @NotNull
     @Column(updatable = false)
-    private LocalDateTime passingDatetime;
+    private LocalDateTime passDatetime;
     private Boolean isRelevant = true;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,7 +42,7 @@ public class Result {
     protected Result() {}
 
     public Result(Employee employee, LocalDateTime passingDatetime) {
-        this.passingDatetime = passingDatetime;
+        this.passDatetime = passingDatetime;
         this.employee = employee;
     }
 
@@ -61,8 +53,8 @@ public class Result {
     public void setRelevant(Boolean relevant) {
         isRelevant = relevant;
     }
-    public LocalDateTime getPassingDatetime() {
-        return passingDatetime;
+    public LocalDateTime getPassDatetime() {
+        return passDatetime;
     }
     public Boolean isRelevant() {
         return isRelevant;

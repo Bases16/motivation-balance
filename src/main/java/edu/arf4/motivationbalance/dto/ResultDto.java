@@ -10,24 +10,24 @@ import java.util.List;
 
 public class ResultDto {
 
-    private Long employeeId;
+    private Long empId;
     @JsonSerialize(converter = LocalDateTimeStringConverter.class)
     @JsonDeserialize(converter = StringLocalDateTimeConverter.class)
-    private LocalDateTime passingDatetime;
+    private LocalDateTime passDatetime;
     private List<EstimationPairDto> estimationPairs;
 
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getEmpId() {
+        return empId;
     }
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmpId(Long empId) {
+        this.empId = empId;
     }
-    public void setPassingDatetime(LocalDateTime passingDatetime) {
-        this.passingDatetime = passingDatetime;
+    public void setPassDatetime(LocalDateTime passDatetime) {
+        this.passDatetime = passDatetime;
     }
-    public LocalDateTime getPassingDatetime() {
-        return passingDatetime;
+    public LocalDateTime getPassDatetime() {
+        return passDatetime;
     }
 
     public List<EstimationPairDto> getEstimationPairs() {

@@ -36,8 +36,8 @@ public class ResultService {
 
     @Transactional
     public Long saveResult(ResultDto dto) {
-        Employee emp = employeeDao.getEmpById(dto.getEmployeeId(), true);
-        Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmployeeId());
+        Employee emp = employeeDao.getEmpById(dto.getEmpId(), true);
+        Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmpId());
         prevRelevantResult.setRelevant(false);
 
         Result result = new Result(emp, LocalDateTime.now());
@@ -96,8 +96,8 @@ public class ResultService {
 
     private ResultDto convertResultToResultDto(Result result) {
         ResultDto dto = new ResultDto();
-        dto.setEmployeeId(result.getEmployee().getId());
-        dto.setPassingDatetime(result.getPassingDatetime());
+        dto.setEmpId(result.getEmployee().getId());
+        dto.setPassDatetime(result.getPassDatetime());
 
         Set<EstimationPair> estimationPairs = result.getEstimationPairs();
         List<EstimationPairDto> estimDtoPairs = new ArrayList<>();

@@ -25,7 +25,7 @@ INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 (7, 7, 'bannedSpec7@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'BANNED');
 
 
-INSERT INTO results(id, emp_id, is_relevant, passing_datetime) VALUES
+INSERT INTO results(id, emp_id, is_relevant, pass_datetime) VALUES
 (1, 3, false, '2019-12-20 12:00'), -- spec 3
 (2, 3, true, '2020-12-20 14:00'), -- spec 3
 

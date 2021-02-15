@@ -9,9 +9,9 @@ import java.util.Locale;
 public class MySimpleTests {
 
     @Test
-    public void test() {
+    public void test() {                             // 21-09-2020-23:55
         System.out.println(LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy-HH:mm", Locale.US))
+                .format(DateTimeFormatter.ofPattern("MM-dd-yyyy-HH:mm", Locale.US))
         );
     }
 
