@@ -11,6 +11,7 @@ public class EstimationPairDto {
         this.factorName = factorName;
         this.estimation = estimationVal;
     }
+    public EstimationPairDto() {}
 
     public String getFactorName() { return factorName; }
     public String getEstimation() { return estimation; }

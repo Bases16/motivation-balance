@@ -38,6 +38,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(frontendAppOrigin)
                 .allowedMethods("POST");
 
+        registry.addMapping("/rest/results/save")
+                .allowedOrigins(frontendAppOrigin)
+                .allowedMethods("POST")
+                .allowedHeaders("Authorization");
+
         registry.addMapping("/rest/results/*")
                 .allowedOrigins(frontendAppOrigin)
                 .allowedMethods("GET")

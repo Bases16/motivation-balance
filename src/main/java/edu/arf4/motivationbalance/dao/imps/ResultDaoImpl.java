@@ -5,6 +5,8 @@ import edu.arf4.motivationbalance.model.Result;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -24,9 +26,15 @@ public class ResultDaoImpl implements ResultDao {
     public Result getRelevantResultByEmpId(Long empId) {
         String query = "SELECT rs FROM Result rs WHERE rs.employee.id = :empId AND rs.isRelevant = true";
 
-        Result result = em.createQuery(query, Result.class)
-                .setParameter("empId", empId)
-                .getSingleResult();
+        Result result = null;
+        try {
+            result = em.createQuery(query, Result.class)
+                    .setParameter("empId", empId)
+                    .getSingleResult();
+        } catch (NoResultException exc) {
+            exc.printStackTrace();
+        }
+
         return result;
     }
 

@@ -38,8 +38,9 @@ public class ResultService {
     public Long saveResult(ResultDto dto) {
         Employee emp = employeeDao.getEmpById(dto.getEmpId(), true);
         Result prevRelevantResult = resultDao.getRelevantResultByEmpId(dto.getEmpId());
-        prevRelevantResult.setRelevant(false);
-
+        if (prevRelevantResult != null) {
+            prevRelevantResult.setRelevant(false);
+        }
         Result result = new Result(emp, LocalDateTime.now());
         List<Factor> relevantFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
