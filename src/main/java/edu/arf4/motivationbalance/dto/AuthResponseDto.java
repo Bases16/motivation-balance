@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthResponseDto {
     @JsonProperty
-    private Long id;
+    private final Long empId;
     @JsonProperty
-    private String email;
+    private final String email;
     @JsonProperty
-    private String token;
+    private final String token;
 
-    public AuthResponseDto(Long id, String email, String token) {
-        this.id = id;
+    public AuthResponseDto(Long empId, String email, String token) {
+        this.empId = empId;
         this.email = email;
         this.token = token;
     }

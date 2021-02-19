@@ -15,21 +15,22 @@ public class TestRestController {
 
     @GetMapping("/user")
     public String userPage(Principal principal) {
-        return "USER";
+        String p = principal != null ? principal.getName() +" "+ principal.toString() : "null";
+        return "USER: " + p;
     }
 
     @GetMapping("/spec")
-    public String specPage(Principal principal) {
+    public String specPage() {
         return "SPEC";
     }
 
     @GetMapping("/manager")
-    public String managerPage(Principal principal) {
+    public String managerPage() {
         return "MANAGER";
     }
 
     @GetMapping("/admin")
-    public String adminPage(Principal principal) {
+    public String adminPage() {
         return "ADMIN";
     }
 

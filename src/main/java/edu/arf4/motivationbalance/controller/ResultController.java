@@ -26,10 +26,15 @@ public class ResultController {
         resultService.saveResult(resultDto);
     }
 
-    @GetMapping("/{id}")
-    public List<ResultDto> getAllResultDtoByEmpId(@PathVariable("id") Long empId) {
+    @GetMapping("/emp/{id}")
+    public List<ResultDto> getAllResultsByEmpId(@PathVariable("id") Long empId) {
 //        if (empId % 2 == 0) throw new RuntimeException();
         return resultService.getAllResultsDtoByEmpId(empId);
+    }
+
+    @GetMapping("/by-manager/{id}")
+    public List<ResultDto> getAllRelevResultsByManagerId(@PathVariable("id") Long managerId) {
+        return resultService.getAllRelevResultsDtoByManagerId(managerId);
     }
 
 

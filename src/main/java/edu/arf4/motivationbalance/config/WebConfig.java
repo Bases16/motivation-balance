@@ -25,38 +25,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedOrigins(frontendAppOrigin)
-//                .allowedMethods("GET", "POST")
-//                .allowedHeaders("Authorization");
-
-        registry.addMapping("/rest/auth/login")
+        registry.addMapping("/**")
                 .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("POST");
-
-        registry.addMapping("/rest/auth/register")
-                .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("POST");
-
-        registry.addMapping("/rest/results/save")
-                .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("POST")
-                .allowedHeaders("Authorization");
-
-        registry.addMapping("/rest/results/*")
-                .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("GET")
-                .allowedHeaders("Authorization");
-
-        registry.addMapping("/rest/factors")
-                .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("GET")
-                .allowedHeaders("Authorization");
-
-        registry.addMapping("/rest/emps/*")
-                .allowedOrigins(frontendAppOrigin)
-                .allowedMethods("GET")
-                .allowedHeaders("Authorization");
+                .allowedMethods("GET", "POST")
+                .allowedHeaders("authorization", "content-type");
     }
 
 }

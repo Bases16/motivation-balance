@@ -11,14 +11,14 @@ import java.util.List;
 @RequestMapping("/rest/factors")
 public class FactorController {
 
-    private FactorService factorService;
+    private final FactorService factorService;
 
     public FactorController(FactorService factorService) {
         this.factorService = factorService;
     }
 
-    @GetMapping
-    public List<String> getActiveFactorNames() {
+    @GetMapping("/active")
+    public List<String> getActiveFactors() {
         return factorService.getActiveFactorNames();
     }
 
