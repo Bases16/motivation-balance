@@ -26,7 +26,8 @@ public class EmployeeService {
 
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         subordinates.forEach(emp -> employeeDtos
-                .add(new EmployeeDto(emp.getId(), emp.getFirstName(), emp.getLastName())
+                .add(new EmployeeDto(emp.getId(), emp.getFirstName(), emp.getLastName(),
+                                     emp.getEmpRole().name() )
         ));
         return employeeDtos;
     }

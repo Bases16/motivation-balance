@@ -5,14 +5,14 @@ INSERT INTO factors(id, name, status) VALUES
 (4, 'Gym', 'ACTIVE');
 
 
-INSERT INTO employees(id, first_name, last_name, manager_id) VALUES
-(1, 'ManagerFN1', 'ManagerLN1', null),
-(2, 'ManagerFN2', 'ManagerLN2', null),
-(3, 'SpecialistFN3', 'SpecialistLN3', 1),
-(4, 'SpecialistFN4', 'SpecialistLN4', 1),
-(5, 'SpecialistFN5', 'SpecialistLN5', 1),
-(6, 'SpecialistFN6', 'SpecialistLN6', 2),
-(7, 'BannedSpecFN7', 'BannedSpecLN7', 2);
+INSERT INTO employees(id, first_name, last_name, emp_role, manager_id) VALUES
+(1, 'ManagerFN1', 'ManagerLN1', 'MANAGER', null),
+(2, 'ManagerFN2', 'ManagerLN2', 'MANAGER', null),
+(3, 'SpecialistFN3', 'SpecialistLN3', 'SPECIALIST', 1),
+(4, 'SpecialistFN4', 'SpecialistLN4', 'SPECIALIST', 1),
+(5, 'SpecialistFN5', 'SpecialistLN5', 'SPECIALIST', 1),
+(6, 'SpecialistFN6', 'SpecialistLN6', 'SPECIALIST', 2),
+(7, 'BannedSpecFN7', 'BannedSpecLN7', 'SPECIALIST', 2);
 
 INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 (998, null, 'admin@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'ADMIN', 'ACTIVE'),

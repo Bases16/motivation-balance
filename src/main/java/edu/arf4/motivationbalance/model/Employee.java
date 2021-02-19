@@ -1,6 +1,10 @@
 package edu.arf4.motivationbalance.model;
 
+import edu.arf4.motivationbalance.model.enums.Role;
+
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,14 +30,12 @@ public class Employee {
     @OneToMany
     @JoinColumn(name = "manager_id")
     private Set<Employee> subordinates = new HashSet<>();
-
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role empRole;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -66,5 +68,13 @@ public class Employee {
 
     public void setSubordinates(Set<Employee> subordinates) {
         this.subordinates = subordinates;
+    }
+
+    public Role getEmpRole() {
+        return empRole;
+    }
+
+    public void setEmpRole(Role empRole) {
+        this.empRole = empRole;
     }
 }

@@ -56,10 +56,10 @@ public class UserService {
         if (userDao.findByUsername(dto.getEmail()) != null) {
             throw new IllegalArgumentException("user is already registered"); // TODO
         }
-
         Employee employee = new Employee();
         employee.setFirstName(dto.getFirstName());
         employee.setLastName(dto.getLastName());
+        employee.setEmpRole(Role.SPECIALIST);
 
         User newUser = new User(employee);
         newUser.setEmail(dto.getEmail());

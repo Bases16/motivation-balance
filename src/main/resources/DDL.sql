@@ -13,6 +13,7 @@ CREATE TABLE employees
     manager_id bigint,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+    emp_role varchar(10) NOT NULL,
     CONSTRAINT employees_pkey PRIMARY KEY (id),
     CONSTRAINT fk_from_emp_to_emp FOREIGN KEY (manager_id)
         REFERENCES employees (id)

@@ -52,6 +52,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(frontendAppOrigin)
                 .allowedMethods("GET")
                 .allowedHeaders("Authorization");
+
+        registry.addMapping("/rest/emps/*")
+                .allowedOrigins(frontendAppOrigin)
+                .allowedMethods("GET")
+                .allowedHeaders("Authorization");
     }
 
 }
