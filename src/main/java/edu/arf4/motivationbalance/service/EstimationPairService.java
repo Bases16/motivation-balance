@@ -22,10 +22,8 @@ public class EstimationPairService {
         this.factorDao = factorDao;
     }
 
-
     @Transactional(readOnly = true)
     public List<EstimationPairDto> getRelevEstimDtoPairsByAllActiveFactors() {
-
         List<Factor> activeFactors = factorDao.getActiveFactors();
         List<EstimationPairDto> resultList = new ArrayList<>();
         activeFactors.forEach(factor -> resultList

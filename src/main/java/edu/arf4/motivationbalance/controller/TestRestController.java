@@ -18,21 +18,4 @@ public class TestRestController {
         String p = principal != null ? principal.getName() +" "+ principal.toString() : "null";
         return "USER: " + p;
     }
-
-    @GetMapping("/spec")
-    public String specPage() {
-        return "SPEC";
-    }
-
-    @GetMapping("/manager")
-    public String managerPage() {
-        return "MANAGER";
-    }
-
-    @GetMapping("/admin")
-    public String adminPage() {
-        return "ADMIN";
-    }
-
-
 }

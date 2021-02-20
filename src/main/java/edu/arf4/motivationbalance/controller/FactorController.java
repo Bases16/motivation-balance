@@ -3,8 +3,6 @@ package edu.arf4.motivationbalance.controller;
 import edu.arf4.motivationbalance.dto.FactorDto;
 import edu.arf4.motivationbalance.service.FactorService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,13 +30,14 @@ public class FactorController {
         return factorService.getAllFactors();
     }
 
-    @PostMapping("manage/change-status/")
+    @PostMapping("manage/change-status")
     public void changeFactorStatus(@RequestBody String factorName) {
         factorService.changeFactorStatus(factorName);
     }
 
-    @PostMapping("manage/create/")
+    @PostMapping("manage/create")
     public void createNewFactor(@RequestBody String factorName) {
         factorService.createNewFactor(factorName);
     }
+
 }
