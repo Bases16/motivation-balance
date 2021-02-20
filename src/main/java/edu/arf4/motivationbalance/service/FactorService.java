@@ -1,6 +1,7 @@
 package edu.arf4.motivationbalance.service;
 
 import edu.arf4.motivationbalance.dao.FactorDao;
+import edu.arf4.motivationbalance.dto.FactorDto;
 import edu.arf4.motivationbalance.model.Factor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,9 +31,11 @@ public class FactorService {
     }
 
     @Transactional(readOnly = true)
-    public List<String> getAllFactorNames() {
+    public List<FactorDto> getAllFactors() {
         List<Factor> allFactors = factorDao.getAllFactors();
-        return allFactors.stream().map(Factor::getName).collect(Collectors.toList());
+        return allFactors.stream()
+                .map((Factor factor) -> new FactorDto(factor.getName(), factor.getStatus().name()))
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

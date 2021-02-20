@@ -1,6 +1,7 @@
 package edu.arf4.motivationbalance.service;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
+import edu.arf4.motivationbalance.dto.FactorDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class FactorServiceTest {
     @Transactional
     public void allSimpleFunctions() {
 
-        List<String> allFactorNames = factorService.getAllFactorNames();
+        List<FactorDto> allFactorNames = factorService.getAllFactors();
         assertNotNull(allFactorNames);
         assertEquals(4, allFactorNames.size());
 
@@ -34,7 +35,7 @@ public class FactorServiceTest {
         String NEW_FACTOR_NAME = "NEW FACTOR";
         factorService.createNewFactor(NEW_FACTOR_NAME);
 
-        allFactorNames = factorService.getAllFactorNames();
+        allFactorNames = factorService.getAllFactors();
         assertEquals(5, allFactorNames.size());
 
         activeFactorNames = factorService.getActiveFactorNames();
@@ -42,7 +43,7 @@ public class FactorServiceTest {
 
         factorService.changeFactorStatus(NEW_FACTOR_NAME);
 
-        allFactorNames = factorService.getAllFactorNames();
+        allFactorNames = factorService.getAllFactors();
         assertEquals(5, allFactorNames.size());
 
         activeFactorNames = factorService.getActiveFactorNames();

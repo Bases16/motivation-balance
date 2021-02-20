@@ -22,7 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtConfigurer jwtConfigurer;
     private final UserDetailsService userDetailsService;
 
-
     public SecurityConfig(JwtConfigurer jwtConfigurer, UserDetailsService userDetailsService) {
         this.jwtConfigurer = jwtConfigurer;
         this.userDetailsService = userDetailsService;
@@ -40,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manager").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/rest/emps/by-manager/*").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/rest/results/by-manager/*").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/rest/factors/manage/*").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
             .and().cors()
