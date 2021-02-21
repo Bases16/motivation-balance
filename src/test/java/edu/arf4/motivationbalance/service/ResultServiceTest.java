@@ -40,7 +40,7 @@ public class ResultServiceTest {
         ResultDto resultDto = new ResultDto();
         List<EstimationPairDto> estimationDtoPairs = new ArrayList<>();
         estimationDtoPairs.add(new EstimationPairDto("Scrum", "LIKE"));
-        estimationDtoPairs.add(new EstimationPairDto("PP", "NOT_LIKE"));
+        estimationDtoPairs.add(new EstimationPairDto("PP", "DISLIKE"));
         estimationDtoPairs.add(new EstimationPairDto("Gym", "NEUTRAL"));
         resultDto.setEstimationPairs(estimationDtoPairs);
         resultDto.setEmpId(1L);
@@ -72,14 +72,14 @@ public class ResultServiceTest {
         assertTrue(dto1Pairs.contains(new EstimationPairDto("Scrum", "NEUTRAL")));
         assertTrue(dto1Pairs.contains(new EstimationPairDto("PP", "LIKE")));
         assertTrue(dto1Pairs.contains(new EstimationPairDto("Free Coffee", "LIKE")));
-        assertTrue(dto1Pairs.contains(new EstimationPairDto("Gym", "NOT_LIKE")));
+        assertTrue(dto1Pairs.contains(new EstimationPairDto("Gym", "DISLIKE")));
 
         ResultDto dto2 = allResultsByEmpId.get(1);
         assertEquals(EMP_ID, dto2.getEmpId());
         assertEquals("2020-12-20 14:00", dto2.getPassDatetime().format(DTF));
         List<EstimationPairDto> dto2Pairs = dto2.getEstimationPairs();
         assertEquals(3, dto2Pairs.size());
-        assertTrue(dto2Pairs.contains(new EstimationPairDto("Scrum", "NOT_LIKE")));
+        assertTrue(dto2Pairs.contains(new EstimationPairDto("Scrum", "DISLIKE")));
         assertTrue(dto2Pairs.contains(new EstimationPairDto("PP", "NEUTRAL")));
         assertTrue(dto2Pairs.contains(new EstimationPairDto("Gym", "LIKE")));
     }
