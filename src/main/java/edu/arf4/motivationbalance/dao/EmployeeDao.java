@@ -8,4 +8,5 @@ public interface EmployeeDao {
     Employee getEmpById(Long id, boolean getProxy);
     List<Long> getAllEmpIds();
     List<Long> getSubordinatesIdsByManagerId(Long id);
+    List<Employee> getAllManagers();
 }

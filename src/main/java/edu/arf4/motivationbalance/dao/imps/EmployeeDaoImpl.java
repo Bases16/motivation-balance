@@ -43,4 +43,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         return idList;
     }
+
+    @Override
+    public List<Employee> getAllManagers() {
+        List<Employee> managers = em
+                .createQuery("SELECT e FROM Employee e WHERE e.empRole = 'MANAGER' ", Employee.class)
+                .getResultList();
+        return managers;
+    }
+
+
 }

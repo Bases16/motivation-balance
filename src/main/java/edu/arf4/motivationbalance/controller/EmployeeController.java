@@ -23,4 +23,11 @@ public class EmployeeController {
     public List<EmployeeDto> getEmployeesByManagerId(@PathVariable("id") Long managerId) {
         return employeeService.getEmployeesDtoByManagerId(managerId);
     }
+
+    @GetMapping("/managers")
+    public List<EmployeeDto> getAllManagers() {
+        return employeeService.getAllManagersDto();
+    }
+
+
 }

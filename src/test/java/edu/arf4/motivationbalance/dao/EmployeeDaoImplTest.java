@@ -2,6 +2,7 @@ package edu.arf4.motivationbalance.dao;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
 import edu.arf4.motivationbalance.dao.EmployeeDao;
+import edu.arf4.motivationbalance.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,12 @@ public class EmployeeDaoImplTest {
         List<Long> allEmpIds = employeeDao.getAllEmpIds();
         assertNotNull(allEmpIds);
         assertEquals(7, allEmpIds.size());
+    }
+
+    @Test
+    public void getAllManagers() {
+        List<Employee> managers = employeeDao.getAllManagers();
+        assertNotNull(managers);
+        assertEquals(2, managers.size());
     }
 }

@@ -32,5 +32,16 @@ public class EmployeeService {
         return employeeDtos;
     }
 
+    @Transactional(readOnly = true)
+    public List<EmployeeDto> getAllManagersDto() {
+        List<Employee> managers = employeeDao.getAllManagers();
+        List<EmployeeDto> managerDtos = new ArrayList<>();
+        managers.forEach(emp -> managerDtos
+                .add(new EmployeeDto(emp.getId(), emp.getFirstName(), emp.getLastName(),
+                                     emp.getEmpRole().name() )
+        ));
+        return managerDtos;
+    }
+
 
 }
