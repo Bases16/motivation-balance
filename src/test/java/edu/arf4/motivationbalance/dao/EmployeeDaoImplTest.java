@@ -22,9 +22,8 @@ public class EmployeeDaoImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    @Transactional // need tx for native query
+    //@Transactional // need tx for native query
     public void getSubordinatesIdsByManagerId() {
-
         List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(2L);
         assertNotNull(subordinatesIds);
         assertEquals(2, subordinatesIds.size());

@@ -2,12 +2,15 @@ package edu.arf4.motivationbalance.model;
 
 import edu.arf4.motivationbalance.model.enums.Role;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,9 +30,11 @@ public class Employee {
     private String lastName;
     @OneToMany(mappedBy = "employee", orphanRemoval = true)
     private Set<Result> results = new HashSet<>();
-    @OneToMany
-    @JoinColumn(name = "manager_id")
+    @OneToMany(mappedBy = "manager")
     private Set<Employee> subordinates = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
     @NotNull
     @Enumerated(EnumType.STRING)
     private Role empRole;
@@ -76,5 +81,13 @@ public class Employee {
 
     public void setEmpRole(Role empRole) {
         this.empRole = empRole;
+    }
+
+    public Employee getManager() {
+        return manager;
+    }
+
+    public void setManager(Employee manager) {
+        this.manager = manager;
     }
 }

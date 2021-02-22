@@ -34,11 +34,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Long> getSubordinatesIdsByManagerId(Long id) {
-        Session session = em.unwrap(Session.class);
-        List<Long> idList = session
-                .createNativeQuery("SELECT id FROM employees WHERE manager_id = :man_id")
-                .addScalar("id", StandardBasicTypes.LONG)
-                .setParameter("man_id", id)
+        List<Long> idList = em
+                .createQuery("SELECT e.id FROM Employee e WHERE e.manager.id = :id", Long.class)
+                .setParameter("id", id)
                 .getResultList();
 
         return idList;
@@ -52,5 +50,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return managers;
     }
 
+    @Override
+    public void removeEmployee(Employee emp) {
+        em.remove(emp);
+    }
 
 }

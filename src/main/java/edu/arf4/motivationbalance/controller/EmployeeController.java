@@ -4,6 +4,8 @@ import edu.arf4.motivationbalance.dto.EmployeeDto;
 import edu.arf4.motivationbalance.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +31,24 @@ public class EmployeeController {
         return employeeService.getAllManagersDto();
     }
 
+    @PostMapping("/change-role")
+    public void changeEmployeeRole(@RequestBody Long empId) {
+        employeeService.changeEmployeeRole(empId);
+    }
+
+    @PostMapping("/remove")
+    public void removeEmployee(@RequestBody Long empId) {
+        employeeService.removeEmployee(empId);
+    }
+
+    @PostMapping("/release-from-manager")
+    public void releaseFromManager(@RequestBody Long empId) {
+        employeeService.releaseFromManager(empId);
+    }
+
+    @PostMapping("/assign-manager/{id}")
+    public void releaseFromManager(@RequestBody Long empId, @PathVariable("id") Long managerId) {
+        employeeService.assignManager(empId, managerId);
+    }
 
 }

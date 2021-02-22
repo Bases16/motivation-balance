@@ -30,6 +30,7 @@ CREATE TABLE users
     CONSTRAINT users_pkey PRIMARY KEY (id),
     CONSTRAINT fk_from_user_to_emp FOREIGN KEY (emp_id)
         REFERENCES employees (id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE factors
