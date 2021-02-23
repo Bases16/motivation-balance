@@ -51,6 +51,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
+    public List<Employee> getEmployeesWithoutManagers() {
+        List<Employee> employees =
+                em.createQuery(
+                "SELECT e FROM Employee e WHERE e.manager is null AND e.empRole = 'SPECIALIST' ", Employee.class
+                ).getResultList();
+        return employees;
+    }
+
+    @Override
     public void removeEmployee(Employee emp) {
         em.remove(emp);
     }

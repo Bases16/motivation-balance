@@ -14,7 +14,9 @@ INSERT INTO employees(id, first_name, last_name, emp_role, manager_id) VALUES
 (6, 'SpecialistFN6', 'SpecialistLN6', 'SPECIALIST', 2),
 (7, 'BannedSpecFN7', 'BannedSpecLN7', 'SPECIALIST', 2),
 (8, 'ManagerFN3', 'ManagerLN3', 'MANAGER', null),
-(9, 'ManagerFN4', 'ManagerLN4', 'MANAGER', null);
+(9, 'ManagerFN4', 'ManagerLN4', 'MANAGER', null),
+(10, 'SpecialistFN7', 'SpecialistLN7', 'SPECIALIST', null),
+(11, 'SpecialistFN8', 'SpecialistLN8', 'SPECIALIST', null);
 
 INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 (998, null, 'admin@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'ADMIN', 'ACTIVE'),
@@ -26,7 +28,9 @@ INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 (6, 6, 'spec6@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
 (7, 7, 'bannedSpec7@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'BANNED'),
 (8, 8, 'manag3@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
-(9, 9, 'manag4@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE');
+(9, 9, 'manag4@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'MANAGER', 'ACTIVE'),
+(10, 10, 'spec7@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE'),
+(11, 11, 'spec8@test.com', '$2y$12$RIzX.iFE9xhwTKyySjFB7O5RkCRwTA.Fs0RNvZX59DNIu9XjqX24G', 'SPECIALIST', 'ACTIVE');
 
 
 INSERT INTO results(id, emp_id, is_relevant, pass_datetime) VALUES

@@ -49,6 +49,17 @@ public class EmployeeService {
         return managerDtos;
     }
 
+    @Transactional(readOnly = true)
+    public List<EmployeeDto> getEmployeesDtoWithoutManagers() {
+        List<Employee> employees = employeeDao.getEmployeesWithoutManagers();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        employees.forEach(emp ->
+            employeeDtos.add(new EmployeeDto(emp.getId(), null, emp.getFirstName(),
+                    emp.getLastName(), emp.getEmpRole().name() ))
+        );
+        return employeeDtos;
+    }
+
     @Transactional
     public void changeEmployeeRole(Long empId) {
         Employee emp = employeeDao.getEmpById(empId, false);
@@ -59,6 +70,7 @@ public class EmployeeService {
             emp.setEmpRole(Role.SPECIALIST);
             user.setRole(Role.SPECIALIST);
         } else {
+            emp.setManager(null);
             emp.setEmpRole(Role.MANAGER);
             user.setRole(Role.MANAGER);
         }

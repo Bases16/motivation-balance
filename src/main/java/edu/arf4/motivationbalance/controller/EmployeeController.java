@@ -31,6 +31,11 @@ public class EmployeeController {
         return employeeService.getAllManagersDto();
     }
 
+    @GetMapping("/emps-without-managers")
+    public List<EmployeeDto> getEmployeesWithoutManagers() {
+        return employeeService.getEmployeesDtoWithoutManagers();
+    }
+
     @PostMapping("/change-role")
     public void changeEmployeeRole(@RequestBody Long empId) {
         employeeService.changeEmployeeRole(empId);

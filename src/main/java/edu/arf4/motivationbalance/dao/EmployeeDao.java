@@ -9,5 +9,6 @@ public interface EmployeeDao {
     List<Long> getAllEmpIds();
     List<Long> getSubordinatesIdsByManagerId(Long id);
     List<Employee> getAllManagers();
+    List<Employee> getEmployeesWithoutManagers();
     void removeEmployee(Employee emp);
 }
