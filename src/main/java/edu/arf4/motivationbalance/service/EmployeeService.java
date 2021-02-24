@@ -25,14 +25,6 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public EmployeeDto getEmployeeById(Long id) {
-        Employee emp = employeeDao.getEmpById(id, false);
-        Long managerId = emp.getManager() == null ? null : emp.getManager().getId();
-        return new EmployeeDto(emp.getId(), managerId, emp.getFirstName(),
-                               emp.getLastName(), emp.getEmpRole().name() );
-    }
-
-    @Transactional(readOnly = true)
     public List<EmployeeDto> searchEmployeesByName(String fir, String sec) {
         List<Employee> employees = new ArrayList<>();
         if (fir != null && sec !=null) employees = employeeDao.searchEmployeeByTwoWords(fir, sec);

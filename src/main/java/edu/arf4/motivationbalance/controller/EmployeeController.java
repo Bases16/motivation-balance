@@ -22,11 +22,6 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/{id}")
-    public EmployeeDto getEmployeeById(@PathVariable("id") Long empId) {
-        return employeeService.getEmployeeById(empId);
-    }
-
     @GetMapping("/search-employee")
     public List<EmployeeDto> getEmployeesByManagerId
             (@QueryParam("first") String first, @QueryParam("second") String second) {
