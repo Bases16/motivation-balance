@@ -25,6 +25,29 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
+    public EmployeeDto getEmployeeById(Long id) {
+        Employee emp = employeeDao.getEmpById(id, false);
+        Long managerId = emp.getManager() == null ? null : emp.getManager().getId();
+        return new EmployeeDto(emp.getId(), managerId, emp.getFirstName(),
+                               emp.getLastName(), emp.getEmpRole().name() );
+    }
+
+    @Transactional(readOnly = true)
+    public List<EmployeeDto> searchEmployeesByName(String fir, String sec) {
+        List<Employee> employees = new ArrayList<>();
+        if (fir != null && sec !=null) employees = employeeDao.searchEmployeeByTwoWords(fir, sec);
+        if (fir != null && sec == null) employees = employeeDao.searchEmployeeByOneWord(fir);
+
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        employees.forEach(emp -> {
+            Long managerId = emp.getManager() == null ? null : emp.getManager().getId();
+            employeeDtos.add(new EmployeeDto(emp.getId(), managerId, emp.getFirstName(),
+                    emp.getLastName(), emp.getEmpRole().name() ));
+        });
+        return employeeDtos;
+    }
+
+    @Transactional(readOnly = true)
     public List<EmployeeDto> getEmployeesDtoByManagerId(Long managerId) {
         Employee manager = employeeDao.getEmpById(managerId, false);
         Set<Employee> subordinates = manager.getSubordinates();
@@ -42,7 +65,7 @@ public class EmployeeService {
         List<Employee> managers = employeeDao.getAllManagers();
         List<EmployeeDto> managerDtos = new ArrayList<>();
         managers.forEach(emp -> {
-            Long managerId = emp.getManager() != null ? emp.getManager().getId() : null;
+            Long managerId = emp.getManager() == null ? null : emp.getManager().getId();
             managerDtos.add(new EmployeeDto(emp.getId(), managerId, emp.getFirstName(),
                                             emp.getLastName(), emp.getEmpRole().name() ));
         });

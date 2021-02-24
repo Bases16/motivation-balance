@@ -10,5 +10,7 @@ public interface EmployeeDao {
     List<Long> getSubordinatesIdsByManagerId(Long id);
     List<Employee> getAllManagers();
     List<Employee> getEmployeesWithoutManagers();
+    List<Employee> searchEmployeeByOneWord(String fir);
+    List<Employee> searchEmployeeByTwoWords(String fir, String sec);
     void removeEmployee(Employee emp);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,17 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @GetMapping("/{id}")
+    public EmployeeDto getEmployeeById(@PathVariable("id") Long empId) {
+        return employeeService.getEmployeeById(empId);
+    }
+
+    @GetMapping("/search-employee")
+    public List<EmployeeDto> getEmployeesByManagerId
+            (@QueryParam("first") String first, @QueryParam("second") String second) {
+        return employeeService.searchEmployeesByName(first, second);
     }
 
     @GetMapping("/by-manager/{id}")
@@ -51,8 +63,8 @@ public class EmployeeController {
         employeeService.releaseFromManager(empId);
     }
 
-    @PostMapping("/assign-manager/{id}")
-    public void releaseFromManager(@RequestBody Long empId, @PathVariable("id") Long managerId) {
+    @PostMapping("/assign-manager/{managerId}")
+    public void releaseFromManager(@RequestBody Long empId, @PathVariable("managerId") Long managerId) {
         employeeService.assignManager(empId, managerId);
     }
 

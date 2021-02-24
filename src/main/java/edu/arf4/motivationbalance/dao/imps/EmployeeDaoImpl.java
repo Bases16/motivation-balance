@@ -60,6 +60,33 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
+    public List<Employee> searchEmployeeByOneWord(String fir) {
+        String query = "SELECT e FROM Employee e WHERE" +
+                "(LOWER(e.firstName) LIKE LOWER(CONCAT('%',:fir,'%')) OR LOWER(e.lastName) LIKE LOWER(CONCAT('%',:fir,'%')))";
+
+        List<Employee> employees = em
+                .createQuery(query, Employee.class)
+                .setParameter("fir", fir)
+                .getResultList();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> searchEmployeeByTwoWords(String fir, String sec) {
+        String query = "SELECT e FROM Employee e WHERE" +
+                "(LOWER(e.firstName) LIKE LOWER(CONCAT('%',:fir,'%')) AND LOWER(e.lastName) LIKE LOWER(CONCAT('%',:sec,'%')))" +
+                "OR" +
+                "(LOWER(e.firstName) LIKE LOWER(CONCAT('%',:sec,'%')) AND LOWER(e.lastName) LIKE LOWER(CONCAT('%',:fir,'%')))";
+
+        List<Employee> employees = em
+                .createQuery(query, Employee.class)
+                .setParameter("fir", fir)
+                .setParameter("sec", sec)
+                .getResultList();
+        return employees;
+    }
+
+    @Override
     public void removeEmployee(Employee emp) {
         em.remove(emp);
     }
