@@ -1,6 +1,5 @@
-package edu.arf4.motivationbalance.controller;
+package edu.arf4.motivationbalance.exc_handling;
 
-import edu.arf4.motivationbalance.security.JwtAuthenticationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +14,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { AuthenticationException.class, IllegalArgumentException.class} )
     protected ResponseEntity<Object> handleExceptions(RuntimeException ex, WebRequest request) {
-        String message = "an unknown error occurred";
-        if (ex instanceof JwtAuthenticationException) {
-            message = "JWT token is expired or invalid";
+        String errorBody = "UNKNOWN";
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        if (ex instanceof AuthenticationException) {
+            errorBody = "BAD_CREDENTIALS";
+            status = HttpStatus.FORBIDDEN;
         } else if (ex instanceof IllegalArgumentException) {
-            if (ex.getMessage().equals("user with such email already exists"))
-            message = ex.getMessage();
+            if (ex.getMessage().equals("EMAIL_EXISTS"))
+            errorBody = ex.getMessage();
+            status = HttpStatus.BAD_REQUEST;
         }
-        return handleExceptionInternal(ex, message, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, errorBody, new HttpHeaders(), status, request);
     }
 
 }

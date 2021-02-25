@@ -46,7 +46,7 @@ public class UserService {
     @Transactional
     public void registerUser(RegisterUserDto dto) {
         if (userDao.findByUsername(dto.getEmail()) != null) {
-            throw new IllegalArgumentException("user with such email already exists");
+            throw new IllegalArgumentException("EMAIL_EXISTS");
         }
         Employee employee = new Employee();
         employee.setFirstName(dto.getFirstName());
