@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EmployeeDaoImplTest {
-
     @Autowired
     private EmployeeDao employeeDao;
 

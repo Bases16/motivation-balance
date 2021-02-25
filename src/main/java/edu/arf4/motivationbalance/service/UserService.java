@@ -11,7 +11,6 @@ import edu.arf4.motivationbalance.model.enums.UserStatus;
 import edu.arf4.motivationbalance.security.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,11 +34,8 @@ public class UserService {
     public AuthResponseDto authenticateUser(AuthRequestDto request) {
         String email = request.getEmail();
         String password = request.getPassword();
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         User user = userDao.findByUsername(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User doesn't exist");
-        }
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         Employee employee = user.getEmployee();
         Long empId = employee != null ? employee.getId() : null;
 
@@ -49,9 +45,8 @@ public class UserService {
 
     @Transactional
     public void registerUser(RegisterUserDto dto) {
-
         if (userDao.findByUsername(dto.getEmail()) != null) {
-            throw new IllegalArgumentException("user is already registered"); // TODO
+            throw new IllegalArgumentException("user with such email already exists");
         }
         Employee employee = new Employee();
         employee.setFirstName(dto.getFirstName());

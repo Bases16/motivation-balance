@@ -15,6 +15,12 @@ public class ResultDaoImpl implements ResultDao {
     private EntityManager em;
 
     @Override
+    public Long saveResult(Result result) {
+        em.persist(result);
+        return result.getId();
+    }
+
+    @Override
     public Result getResultById(Long id) {
         return em.find(Result.class, id);
     }
@@ -22,42 +28,29 @@ public class ResultDaoImpl implements ResultDao {
     @Override
     public Result getRelevantResultByEmpId(Long empId) {
         String query = "SELECT rs FROM Result rs WHERE rs.employee.id = :empId AND rs.isRelevant = true";
-
         Result result = null;
         try {
             result = em.createQuery(query, Result.class)
                     .setParameter("empId", empId)
                     .getSingleResult();
-        } catch (NoResultException exc) {
-            exc.printStackTrace();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
         }
-
         return result;
     }
 
     @Override
-    public Long saveResult(Result result) {
-        em.persist(result);
-        return result.getId();
-    }
-
-    @Override
     public List<Result> getAllResultsByEmpId(Long empId) {
-        String query = "SELECT rs FROM Result rs WHERE rs.employee.id = :empId";
-        return em.createQuery(query, Result.class)
+        return em.createQuery("SELECT rs FROM Result rs WHERE rs.employee.id = :empId", Result.class)
                 .setParameter("empId", empId)
                 .getResultList();
     }
 
     @Override
     public List<Result> getAllRelevResultsByEmpIds(List<Long> ids) {
-
-        List<Result> results = em
-                .createQuery("SELECT rs FROM Result rs WHERE rs.isRelevant = true AND rs.employee.id IN :ids")
+        return em.createQuery("SELECT rs FROM Result rs WHERE rs.isRelevant = true AND rs.employee.id IN :ids")
                 .setParameter("ids", ids)
                 .getResultList();
-
-        return results;
     }
 
 }

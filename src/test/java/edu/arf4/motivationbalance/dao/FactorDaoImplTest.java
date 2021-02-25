@@ -16,7 +16,6 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FactorDaoImplTest {
-
     @Autowired
     private FactorDao factorDao;
 

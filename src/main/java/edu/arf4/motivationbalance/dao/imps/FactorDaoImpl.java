@@ -15,27 +15,21 @@ public class FactorDaoImpl implements FactorDao {
 
     @Override
     public List<Factor> getActiveFactors() {
-        String query = "SELECT fr FROM Factor fr WHERE fr.status = 'ACTIVE' ";
-        List<Factor> factors = null;
-        factors = em.createQuery(query, Factor.class).getResultList();
-        return factors;
+        return em.createQuery("SELECT fr FROM Factor fr WHERE fr.status = 'ACTIVE' ", Factor.class)
+                .getResultList();
     }
 
     @Override
     public List<Factor> getAllFactors() {
-        String query = "SELECT fr FROM Factor fr";
-        List<Factor> factors = null;
-        factors = em.createQuery(query, Factor.class).getResultList();
-        return factors;
+        return em.createQuery("SELECT fr FROM Factor fr", Factor.class)
+                .getResultList();
     }
 
     @Override
     public Factor getFactorByName(String name) {
-        String query = "SELECT fr FROM Factor fr WHERE fr.name = :name";
-        Factor factor = em.createQuery(query, Factor.class)
+        return em.createQuery("SELECT fr FROM Factor fr WHERE fr.name = :name", Factor.class)
                 .setParameter("name", name)
                 .getSingleResult();
-        return factor;
     }
 
     @Override

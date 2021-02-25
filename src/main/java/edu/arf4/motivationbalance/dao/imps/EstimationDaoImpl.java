@@ -20,4 +20,5 @@ public class EstimationDaoImpl implements EstimationPairDao {
                 .setParameter("id", factorId)
                 .getResultList();
     }
+
 }

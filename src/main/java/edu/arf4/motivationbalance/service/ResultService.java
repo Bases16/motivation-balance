@@ -40,13 +40,13 @@ public class ResultService {
             prevRelevantResult.setRelevant(false);
         }
         Result result = new Result(emp, LocalDateTime.now());
-        List<Factor> relevantFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
+        List<Factor> activeFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
         dto.getEstimationPairs()
                 .forEach(dtoPair -> {
                     EstimationPair pair = new EstimationPair();
                     pair.setResult(result);
-                    pair.setFactor(getOptFactorByNameFromGivenList(dtoPair.getFactorName(), relevantFactors)
+                    pair.setFactor(getOptFactorByNameFromGivenList(dtoPair.getFactorName(), activeFactors)
                             .orElseGet( () -> factorDao.getFactorByName(dtoPair.getFactorName()) )
                     );
                     pair.setEstim(Estimation.valueOf(dtoPair.getEstimation()));
@@ -67,15 +67,13 @@ public class ResultService {
     @Transactional(readOnly = true)
     public List<ResultDto> getAllRelevResultsDto() {
         List<Long> allEmpIds = employeeDao.getAllEmpIds();
-        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(allEmpIds);
-        return resultsDto;
+        return getAllRelevResultsDtoByEmpIds(allEmpIds);
     }
 
     @Transactional(readOnly = true)
     public List<ResultDto> getAllRelevResultsDtoByManagerId(Long manId) {
         List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(manId);
-        List<ResultDto> resultsDto = getAllRelevResultsDtoByEmpIds(subordinatesIds);
-        return resultsDto;
+        return getAllRelevResultsDtoByEmpIds(subordinatesIds);
     }
 
 

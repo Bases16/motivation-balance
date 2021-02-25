@@ -21,4 +21,5 @@ public class StatsController {
     public List<EstimationPairDto> getAllRelevEstimationPairs() {
         return estimationPairService.getRelevEstimDtoPairsByAllActiveFactors();
     }
+
 }

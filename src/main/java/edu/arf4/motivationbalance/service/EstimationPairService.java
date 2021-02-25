@@ -37,4 +37,5 @@ public class EstimationPairService {
                 .map(p -> new EstimationPairDto(p.getFactor().getName(), p.getEstim().name()))
                 .collect(Collectors.toList());
     }
+
 }

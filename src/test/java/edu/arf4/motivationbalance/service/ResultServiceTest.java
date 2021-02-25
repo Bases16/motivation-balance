@@ -25,7 +25,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = DatabaseConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResultServiceTest {
-
     @Autowired
     private ResultService resultService;
     @Autowired
@@ -100,8 +99,6 @@ public class ResultServiceTest {
         dtos = resultService.getAllRelevResultsDtoByManagerId(2L);
         assertNotNull(dtos);
         assertEquals(1, dtos.size());
-
     }
-
 
 }

@@ -27,7 +27,6 @@ public class ResultController {
 
     @GetMapping("/emp/{id}")
     public List<ResultDto> getAllResultsByEmpId(@PathVariable("id") Long empId) {
-//        if (empId % 2 == 0) throw new RuntimeException();
         return resultService.getAllResultsDtoByEmpId(empId);
     }
 
@@ -35,6 +34,5 @@ public class ResultController {
     public List<ResultDto> getAllRelevResultsByManagerId(@PathVariable("id") Long managerId) {
         return resultService.getAllRelevResultsDtoByManagerId(managerId);
     }
-
 
 }
