@@ -22,7 +22,6 @@ import java.util.Set;
 
 @Service
 public class ResultService {
-
     private final FactorDao factorDao;
     private final ResultDao resultDao;
     private final EmployeeDao employeeDao;
@@ -32,7 +31,6 @@ public class ResultService {
         this.resultDao = resultDao;
         this.employeeDao = employeeDao;
     }
-
 
     @Transactional
     public Long saveResult(ResultDto dto) {
@@ -81,7 +79,7 @@ public class ResultService {
     }
 
 
-    // TODO не выдаются рез-ты сотрудников, которые еще не прошли тест (сопоставить на фронте?)
+
     private List<ResultDto> getAllRelevResultsDtoByEmpIds(List<Long> ids) {
         List<Result> results = resultDao.getAllRelevResultsByEmpIds(ids);
         List<ResultDto> resultDtoList = new ArrayList<>();
@@ -103,8 +101,8 @@ public class ResultService {
         Set<EstimationPair> estimationPairs = result.getEstimationPairs();
         List<EstimationPairDto> estimDtoPairs = new ArrayList<>();
 
-        estimationPairs.forEach( (pair) -> estimDtoPairs.add(             // subselect here
-                new EstimationPairDto(pair.getFactor().getName(), pair.getEstim().name()) //batch here
+        estimationPairs.forEach( (pair) -> estimDtoPairs.add(                             // subselect here
+                new EstimationPairDto(pair.getFactor().getName(), pair.getEstim().name()) // batch here
         ));
         dto.setEstimationPairs(estimDtoPairs);
         return dto;

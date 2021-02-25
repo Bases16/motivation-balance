@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
 
@@ -40,6 +39,5 @@ public class UserDaoImpl implements UserDao {
                 .setParameter("id", empId)
                 .getSingleResult();
     }
-
 
 }

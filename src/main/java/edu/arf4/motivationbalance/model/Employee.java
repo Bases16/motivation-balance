@@ -2,7 +2,6 @@ package edu.arf4.motivationbalance.model;
 
 import edu.arf4.motivationbalance.model.enums.Role;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,7 +19,6 @@ import java.util.Set;
 @Entity
 @Table(name = "employees")
 public class Employee {
-
     @Id
     @GeneratedValue(generator = "MY_ID_GENERATOR")
     private Long id;
@@ -39,55 +37,35 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Role empRole;
 
+
     public Long getId() {
         return id;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public Set<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(Set<Result> results) {
-        this.results = results;
-    }
-
     public Set<Employee> getSubordinates() {
         return subordinates;
     }
-
-    public void setSubordinates(Set<Employee> subordinates) {
-        this.subordinates = subordinates;
-    }
-
-    public Role getEmpRole() {
-        return empRole;
-    }
-
-    public void setEmpRole(Role empRole) {
-        this.empRole = empRole;
-    }
-
     public Employee getManager() {
         return manager;
     }
-
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+    public Role getEmpRole() {
+        return empRole;
+    }
+    public void setEmpRole(Role empRole) {
+        this.empRole = empRole;
     }
 }

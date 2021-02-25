@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class EstimationPairService {
-
     private final EstimationPairDao estimationPairDao;
     private final FactorDao factorDao;
 

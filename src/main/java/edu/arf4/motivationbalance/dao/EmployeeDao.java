@@ -1,7 +1,6 @@
 package edu.arf4.motivationbalance.dao;
 
 import edu.arf4.motivationbalance.model.Employee;
-
 import java.util.List;
 
 public interface EmployeeDao {

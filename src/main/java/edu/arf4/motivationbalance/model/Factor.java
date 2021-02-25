@@ -1,6 +1,5 @@
 package edu.arf4.motivationbalance.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import edu.arf4.motivationbalance.model.enums.FactorStatus;
 import org.hibernate.annotations.BatchSize;
 
@@ -27,8 +26,8 @@ public class Factor {
     @Enumerated(EnumType.STRING)
     private FactorStatus status = FactorStatus.ACTIVE;
 
-    protected Factor() {}
 
+    protected Factor() {}
     public Factor(String name) {
         this.name = name;
     }
@@ -37,7 +36,6 @@ public class Factor {
     public Long getId() {
         return id;
     }
-    @JsonValue
     public String getName() {
         return name;
     }

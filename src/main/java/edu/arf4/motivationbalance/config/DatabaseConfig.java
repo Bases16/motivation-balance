@@ -29,7 +29,6 @@ public class DatabaseConfig {
     private final Properties dataSourceProperties;
 
     public DatabaseConfig() {
-
         Properties hibernateJpaProperties = new Properties();
         Properties datasourceProperties = new Properties();
         try {
@@ -45,7 +44,6 @@ public class DatabaseConfig {
             throw new IllegalStateException("couldn't have loaded persistence properties");
         }
     }
-
 
     @Bean(initMethod = "init", destroyMethod = "close")
     public AtomikosDataSourceBean xaDataSource() {
@@ -90,6 +88,5 @@ public class DatabaseConfig {
         transactionManager.setUserTransaction(userTransactionManager());
         return transactionManager;
     }
-
 
 }

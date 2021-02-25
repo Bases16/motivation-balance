@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class FactorService {
-
     private final FactorDao factorDao;
 
     public FactorService(FactorDao factorDao) {
@@ -23,7 +22,7 @@ public class FactorService {
         Factor factor = new Factor(factorName);
         return factorDao.createFactor(factor);
     }
-    //кнопочки восстановить/удалить на конкретном факторе на UI вызовут контроллер, который вызовет это
+
     @Transactional
     public void changeFactorStatus(String factorName) {
         Factor factor = factorDao.getFactorByName(factorName);
@@ -43,4 +42,5 @@ public class FactorService {
         List<Factor> activeFactors = factorDao.getActiveFactors();
         return activeFactors.stream().map(Factor::getName).collect(Collectors.toList());
     }
+
 }

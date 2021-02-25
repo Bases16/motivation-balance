@@ -1,14 +1,12 @@
 package edu.arf4.motivationbalance.dao;
 
 import edu.arf4.motivationbalance.config.DatabaseConfig;
-import edu.arf4.motivationbalance.dao.EmployeeDao;
 import edu.arf4.motivationbalance.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,7 +20,6 @@ public class EmployeeDaoImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    //@Transactional // need tx for native query
     public void getSubordinatesIdsByManagerId() {
         List<Long> subordinatesIds = employeeDao.getSubordinatesIdsByManagerId(2L);
         assertNotNull(subordinatesIds);

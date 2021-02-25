@@ -9,13 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ResultDto {
-
     private Long empId;
     @JsonSerialize(converter = LocalDateTimeStringConverter.class)
     @JsonDeserialize(converter = StringLocalDateTimeConverter.class)
     private LocalDateTime passDatetime;
     private List<EstimationPairDto> estimationPairs;
-
 
     public Long getEmpId() {
         return empId;
@@ -23,13 +21,12 @@ public class ResultDto {
     public void setEmpId(Long empId) {
         this.empId = empId;
     }
-    public void setPassDatetime(LocalDateTime passDatetime) {
-        this.passDatetime = passDatetime;
-    }
     public LocalDateTime getPassDatetime() {
         return passDatetime;
     }
-
+    public void setPassDatetime(LocalDateTime passDatetime) {
+        this.passDatetime = passDatetime;
+    }
     public List<EstimationPairDto> getEstimationPairs() {
         return estimationPairs;
     }

@@ -8,11 +8,9 @@ public class FactorDto {
     @JsonProperty
     private String status;
 
+    public FactorDto() {}
     public FactorDto(String name, String status) {
         this.name = name;
         this.status = status;
-    }
-
-    public FactorDto() {
     }
 }

@@ -21,7 +21,6 @@ import java.util.Date;
 @Component
 @PropertySource("classpath:custom_app.properties")
 public class JwtTokenProvider {
-
     private final UserDetailsService userDetailsService;
 
     @Value("${jwt.secret}")
@@ -35,12 +34,10 @@ public class JwtTokenProvider {
         this.userDetailsService = userDetailsService;
     }
 
-
     @PostConstruct
     public void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
-
 
     public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);

@@ -10,10 +10,8 @@ import java.util.List;
 
 @Repository
 public class EstimationDaoImpl implements EstimationPairDao {
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
-
 
     @Override
     public List<EstimationPair> getRelevEstimPairsByFactorId(Long factorId) {

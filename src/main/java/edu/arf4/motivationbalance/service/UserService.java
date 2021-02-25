@@ -18,12 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
-
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authManager;
-
 
     public UserService(UserDao userDao, PasswordEncoder passwordEncoder,
                        JwtTokenProvider jwtTokenProvider, AuthenticationManager authManager) {
@@ -49,7 +47,6 @@ public class UserService {
         return new AuthResponseDto(empId, email, token);
     }
 
-
     @Transactional
     public void registerUser(RegisterUserDto dto) {
 
@@ -69,4 +66,5 @@ public class UserService {
 
         userDao.createUser(newUser);
     }
+
 }

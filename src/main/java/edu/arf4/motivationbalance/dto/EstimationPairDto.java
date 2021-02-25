@@ -3,15 +3,14 @@ package edu.arf4.motivationbalance.dto;
 import java.util.Objects;
 
 public class EstimationPairDto {
-
     private String factorName;
     private String estimation;
 
+    public EstimationPairDto() {}
     public EstimationPairDto(String factorName, String estimationVal) {
         this.factorName = factorName;
         this.estimation = estimationVal;
     }
-    public EstimationPairDto() {}
 
     public String getFactorName() { return factorName; }
     public String getEstimation() { return estimation; }

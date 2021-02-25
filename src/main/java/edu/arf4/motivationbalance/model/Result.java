@@ -21,7 +21,6 @@ import java.util.Set;
 @Entity
 @Table(name = "results")
 public class Result {
-
     @Id
     @GeneratedValue(generator = "MY_ID_GENERATOR")
     private Long id;
@@ -33,14 +32,12 @@ public class Result {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employee employee;
-
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "result", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<EstimationPair> estimationPairs = new HashSet<>();
 
 
     protected Result() {}
-
     public Result(Employee employee, LocalDateTime passingDatetime) {
         this.passDatetime = passingDatetime;
         this.employee = employee;
@@ -50,14 +47,14 @@ public class Result {
     public Long getId() {
         return id;
     }
-    public void setRelevant(Boolean relevant) {
-        isRelevant = relevant;
-    }
     public LocalDateTime getPassDatetime() {
         return passDatetime;
     }
     public Boolean isRelevant() {
         return isRelevant;
+    }
+    public void setRelevant(Boolean relevant) {
+        isRelevant = relevant;
     }
     public Employee getEmployee() {
         return employee;

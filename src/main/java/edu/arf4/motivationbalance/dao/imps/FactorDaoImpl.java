@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public class FactorDaoImpl implements FactorDao {
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
 
@@ -33,7 +32,6 @@ public class FactorDaoImpl implements FactorDao {
     @Override
     public Factor getFactorByName(String name) {
         String query = "SELECT fr FROM Factor fr WHERE fr.name = :name";
-        // todo OPTIONAL??
         Factor factor = em.createQuery(query, Factor.class)
                 .setParameter("name", name)
                 .getSingleResult();

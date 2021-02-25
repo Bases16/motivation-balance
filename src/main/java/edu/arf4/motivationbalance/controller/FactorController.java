@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/factors")
 public class FactorController {
-
     private final FactorService factorService;
 
     public FactorController(FactorService factorService) {

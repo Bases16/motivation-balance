@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/results")
 public class ResultController {
-
     private final ResultService resultService;
 
     public ResultController(ResultService resultService) {

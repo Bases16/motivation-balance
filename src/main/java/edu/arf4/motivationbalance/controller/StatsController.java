@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/stats")
 public class StatsController {
-
     private final EstimationPairService estimationPairService;
 
     public StatsController(EstimationPairService estimationPairService) {

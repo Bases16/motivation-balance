@@ -6,21 +6,18 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class ResultDaoImpl implements ResultDao {
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
 
-    @Override     // todo  to test class with own EMF ??
+    @Override
     public Result getResultById(Long id) {
         return em.find(Result.class, id);
     }
-
 
     @Override
     public Result getRelevantResultByEmpId(Long empId) {
@@ -62,6 +59,5 @@ public class ResultDaoImpl implements ResultDao {
 
         return results;
     }
-
 
 }

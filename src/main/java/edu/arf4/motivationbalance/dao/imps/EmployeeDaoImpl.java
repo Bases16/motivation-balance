@@ -2,9 +2,6 @@ package edu.arf4.motivationbalance.dao.imps;
 
 import edu.arf4.motivationbalance.dao.EmployeeDao;
 import edu.arf4.motivationbalance.model.Employee;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,7 +10,6 @@ import java.util.List;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
-
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager em;
 

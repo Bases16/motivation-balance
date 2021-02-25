@@ -3,7 +3,6 @@ package edu.arf4.motivationbalance.controller;
 import edu.arf4.motivationbalance.dto.AuthRequestDto;
 import edu.arf4.motivationbalance.dto.AuthResponseDto;
 import edu.arf4.motivationbalance.dto.RegisterUserDto;
-import edu.arf4.motivationbalance.service.ResultService;
 import edu.arf4.motivationbalance.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,13 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/auth")
 public class UserController {
+    private final UserService userService;
 
-    private UserService userService;
-    private ResultService resultService;
-
-    public UserController(UserService userService, ResultService resultService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.resultService = resultService;
     }
 
     @PostMapping("/login")
@@ -40,10 +36,5 @@ public class UserController {
         userService.registerUser(registerUserDto);
     }
 
-//    @PostMapping("/logout")
-//    public void logout(HttpServletRequest request, HttpServletResponse response) {
-//        SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
-//        securityContextLogoutHandler.logout(request, response, null);
-//    }
 
 }
