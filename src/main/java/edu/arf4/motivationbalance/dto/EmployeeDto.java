@@ -3,15 +3,16 @@ package edu.arf4.motivationbalance.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EmployeeDto {
-    private Long id;
     @JsonProperty
-    private Long managerId;
+    private final Long id;
     @JsonProperty
-    private String firstName;
+    private final Long managerId;
     @JsonProperty
-    private String lastName;
+    private final String firstName;
     @JsonProperty
-    private String empRole;
+    private final String lastName;
+    @JsonProperty
+    private final String empRole;
 
     public EmployeeDto(Long id, Long managerId, String firstName, String lastName, String empRole) {
         this.id = id;
@@ -19,10 +20,6 @@ public class EmployeeDto {
         this.firstName = firstName;
         this.lastName = lastName;
         this.empRole = empRole;
-    }
-
-    public Long getId() {
-        return id;
     }
 
 }

@@ -41,7 +41,7 @@ public class DatabaseConfig {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalStateException("couldn't have loaded persistence properties");
+            throw new IllegalStateException("couldn't load persistence properties");
         }
     }
 

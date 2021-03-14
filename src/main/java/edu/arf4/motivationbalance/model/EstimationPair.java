@@ -26,7 +26,6 @@ public class EstimationPair {
     @Enumerated(EnumType.STRING)
     private Estimation estim;
 
-
     public Long getId() {
         return id;
     }
@@ -48,4 +47,5 @@ public class EstimationPair {
     public void setEstim(Estimation estim) {
         this.estim = estim;
     }
+
 }

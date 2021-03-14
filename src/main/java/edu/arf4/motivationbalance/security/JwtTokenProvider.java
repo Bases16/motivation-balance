@@ -65,9 +65,11 @@ public class JwtTokenProvider {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
+
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
+
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader(authHeader);
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {

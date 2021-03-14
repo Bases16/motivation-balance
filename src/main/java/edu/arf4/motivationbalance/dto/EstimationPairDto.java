@@ -27,4 +27,5 @@ public class EstimationPairDto {
     public int hashCode() {
         return Objects.hash(factorName, estimation);
     }
+
 }

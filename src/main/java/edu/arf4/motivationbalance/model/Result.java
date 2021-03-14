@@ -1,6 +1,5 @@
 package edu.arf4.motivationbalance.model;
 
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
@@ -32,17 +31,15 @@ public class Result {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employee employee;
-    @Fetch(FetchMode.SUBSELECT)
+    @org.hibernate.annotations.Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "result", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<EstimationPair> estimationPairs = new HashSet<>();
-
 
     protected Result() {}
     public Result(Employee employee, LocalDateTime passingDatetime) {
         this.passDatetime = passingDatetime;
         this.employee = employee;
     }
-
 
     public Long getId() {
         return id;
@@ -65,4 +62,5 @@ public class Result {
     public void setEstimationPairs(Set<EstimationPair> estimationPairs) {
         this.estimationPairs = estimationPairs;
     }
+
 }

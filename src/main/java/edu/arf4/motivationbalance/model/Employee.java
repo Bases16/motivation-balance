@@ -37,7 +37,6 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Role empRole;
 
-
     public Long getId() {
         return id;
     }
@@ -68,4 +67,5 @@ public class Employee {
     public void setEmpRole(Role empRole) {
         this.empRole = empRole;
     }
+
 }

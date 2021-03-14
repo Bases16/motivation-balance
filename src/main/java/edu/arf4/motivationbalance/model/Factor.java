@@ -1,7 +1,6 @@
 package edu.arf4.motivationbalance.model;
 
 import edu.arf4.motivationbalance.model.enums.FactorStatus;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "factors")
-@BatchSize(size = 10)
+@org.hibernate.annotations.BatchSize(size = 10)
 public class Factor {
     @Id
     @GeneratedValue(generator = "MY_ID_GENERATOR")
@@ -26,12 +25,10 @@ public class Factor {
     @Enumerated(EnumType.STRING)
     private FactorStatus status = FactorStatus.ACTIVE;
 
-
     protected Factor() {}
     public Factor(String name) {
         this.name = name;
     }
-
 
     public Long getId() {
         return id;
@@ -48,4 +45,5 @@ public class Factor {
     public void setStatus(FactorStatus status) {
         this.status = status;
     }
+
 }

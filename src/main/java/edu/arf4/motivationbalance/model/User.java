@@ -38,12 +38,10 @@ public class User {
     @JoinColumn(name = "emp_id", updatable = false, unique = true)
     private Employee employee;
 
-
     protected User() {}
     public User(Employee employee) {
         this.employee = employee;
     }
-
 
     public Long getId() {
         return id;
@@ -78,4 +76,5 @@ public class User {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
 }

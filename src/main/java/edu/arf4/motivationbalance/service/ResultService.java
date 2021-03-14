@@ -96,13 +96,14 @@ public class ResultService {
         dto.setEmpId(result.getEmployee().getId());
         dto.setPassDatetime(result.getPassDatetime());
 
-        Set<EstimationPair> estimationPairs = result.getEstimationPairs();
+        Set<EstimationPair> estimationPairs = result.getEstimationPairs(); // subselect here
         List<EstimationPairDto> estimDtoPairs = new ArrayList<>();
 
-        estimationPairs.forEach( (pair) -> estimDtoPairs.add(                             // subselect here
+        estimationPairs.forEach( (pair) -> estimDtoPairs.add(
                 new EstimationPairDto(pair.getFactor().getName(), pair.getEstim().name()) // batch here
         ));
         dto.setEstimationPairs(estimDtoPairs);
         return dto;
     }
+
 }
