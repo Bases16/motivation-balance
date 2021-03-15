@@ -13,7 +13,7 @@ import edu.arf4.motivationbalance.model.enums.Estimation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +39,7 @@ public class ResultService {
         if (prevRelevantResult != null) {
             prevRelevantResult.setRelevant(false);
         }
-        Result result = new Result(emp, LocalDateTime.now());
+        Result result = new Result(emp, OffsetDateTime.now());
         List<Factor> activeFactors = factorDao.getActiveFactors(); // to avoid excessive SELECT's
         Set<EstimationPair> estimPairs = new HashSet<>();
         dto.getEstimationPairs()

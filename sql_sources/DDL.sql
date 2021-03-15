@@ -45,7 +45,7 @@ CREATE TABLE results
 (
     id bigint NOT NULL,
     is_relevant boolean NOT NULL,
-    pass_datetime timestamp NOT NULL,
+    pass_datetime timestamp with time zone NOT NULL,
     emp_id bigint NOT NULL,
     CONSTRAINT results_pkey PRIMARY KEY (id),
     CONSTRAINT fk_from_result_to_emp FOREIGN KEY (emp_id)

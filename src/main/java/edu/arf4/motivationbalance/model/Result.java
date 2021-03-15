@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public class Result {
     private Long id;
     @NotNull
     @Column(updatable = false)
-    private LocalDateTime passDatetime;
+    private OffsetDateTime passDatetime;
     private Boolean isRelevant = true;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +36,7 @@ public class Result {
     private Set<EstimationPair> estimationPairs = new HashSet<>();
 
     protected Result() {}
-    public Result(Employee employee, LocalDateTime passingDatetime) {
+    public Result(Employee employee, OffsetDateTime passingDatetime) {
         this.passDatetime = passingDatetime;
         this.employee = employee;
     }
@@ -44,7 +44,7 @@ public class Result {
     public Long getId() {
         return id;
     }
-    public LocalDateTime getPassDatetime() {
+    public OffsetDateTime getPassDatetime() {
         return passDatetime;
     }
     public Boolean isRelevant() {

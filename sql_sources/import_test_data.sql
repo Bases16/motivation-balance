@@ -34,13 +34,13 @@ INSERT INTO users(id, emp_id, email, password, role, status) VALUES
 
 
 INSERT INTO results(id, emp_id, is_relevant, pass_datetime) VALUES
-(1, 3, false, '2019-12-20 12:00'), -- spec 3
-(2, 3, true, '2020-12-20 14:00'), -- spec 3
+(1, 3, false, '2019-12-20 12:00+03'), -- spec 3
+(2, 3, true, '2020-12-20 14:00+03'), -- spec 3
 
-(3, 4, true, '2020-12-21 12:00'), -- spec 4
-(4, 6, true, '2020-12-25 12:00'), -- spec 6
+(3, 4, true, '2020-12-21 12:00+03'), -- spec 4
+(4, 6, true, '2020-12-25 12:00+03'), -- spec 6
 
-(5, 1, true, '2020-12-26 12:00'); -- manager 1
+(5, 1, true, '2020-12-26 12:00+03'); -- manager 1
 
 
 INSERT INTO estimation_pairs(id, result_id, factor_id, estim) VALUES
