@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/auth")
+@RequestMapping("/v1/auth")
 public class UserController {
     private final UserService userService;
 

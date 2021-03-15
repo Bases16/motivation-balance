@@ -2,9 +2,11 @@ package edu.arf4.motivationbalance.controller;
 
 import edu.arf4.motivationbalance.dto.EmployeeDto;
 import edu.arf4.motivationbalance.service.EmployeeService;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +15,7 @@ import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/emps")
+@RequestMapping("/v1/emps")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -21,8 +23,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/search-employee")
-    public List<EmployeeDto> getEmployeesByManagerId
+    @GetMapping("/search")
+    public List<EmployeeDto> searchEmployees
             (@QueryParam("first") String first, @QueryParam("second") String second) {
         return employeeService.searchEmployeesByName(first, second);
     }
@@ -37,28 +39,28 @@ public class EmployeeController {
         return employeeService.getAllManagersDto();
     }
 
-    @GetMapping("/emps-without-managers")
+    @GetMapping("/without-manager")
     public List<EmployeeDto> getEmployeesWithoutManagers() {
         return employeeService.getEmployeesDtoWithoutManagers();
     }
 
-    @PostMapping("/change-role")
+    @PutMapping("/change-role")
     public void changeEmployeeRole(@RequestBody Long empId) {
         employeeService.changeEmployeeRole(empId);
     }
 
-    @PostMapping("/remove")
-    public void removeEmployee(@RequestBody Long empId) {
+    @DeleteMapping("/remove/{empId}")
+    public void removeEmployee(@PathVariable("empId") Long empId) {
         employeeService.removeEmployee(empId);
     }
 
-    @PostMapping("/release-from-manager")
+    @PutMapping("/release-from-manager")
     public void releaseFromManager(@RequestBody Long empId) {
         employeeService.releaseFromManager(empId);
     }
 
-    @PostMapping("/assign-manager/{managerId}")
-    public void releaseFromManager(@RequestBody Long empId, @PathVariable("managerId") Long managerId) {
+    @PutMapping("/assign-manager/{managerId}")
+    public void assignNewManager(@RequestBody Long empId, @PathVariable("managerId") Long managerId) {
         employeeService.assignManager(empId, managerId);
     }
 

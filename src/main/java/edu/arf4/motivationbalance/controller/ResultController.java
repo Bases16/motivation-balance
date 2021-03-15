@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/results")
+@RequestMapping("/v1")
 public class ResultController {
     private final ResultService resultService;
 
@@ -20,17 +20,17 @@ public class ResultController {
         this.resultService = resultService;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/results")
     public void saveResult(@RequestBody ResultDto resultDto) {
         resultService.saveResult(resultDto);
     }
 
-    @GetMapping("/emp/{id}")
+    @GetMapping("/emps/{id}/results")
     public List<ResultDto> getAllResultsByEmpId(@PathVariable("id") Long empId) {
         return resultService.getAllResultsDtoByEmpId(empId);
     }
 
-    @GetMapping("/by-manager/{id}")
+    @GetMapping("/emps/by-manager/{id}/results/relevant")
     public List<ResultDto> getAllRelevResultsByManagerId(@PathVariable("id") Long managerId) {
         return resultService.getAllRelevResultsDtoByManagerId(managerId);
     }

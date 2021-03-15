@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/stats")
+@RequestMapping("/v1/estim-pairs")
 public class StatsController {
     private final EstimationPairService estimationPairService;
 
@@ -17,7 +17,7 @@ public class StatsController {
         this.estimationPairService = estimationPairService;
     }
 
-    @GetMapping("/all-relev-pairs")
+    @GetMapping("/relevant")
     public List<EstimationPairDto> getAllRelevEstimationPairs() {
         return estimationPairService.getRelevEstimDtoPairsByAllActiveFactors();
     }

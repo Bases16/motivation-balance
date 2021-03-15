@@ -45,18 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
-                .antMatchers("/rest/auth/login", "/rest/auth/register").permitAll()
-                .antMatchers("/rest/emps/by-manager/*").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/rest/emps/search-employee").hasRole("ADMIN")
-                .antMatchers("/rest/emps/managers").hasRole("ADMIN")
-                .antMatchers("/rest/emps/emps-without-managers").hasRole("ADMIN")
-                .antMatchers("/rest/emps/change-role").hasRole("ADMIN")
-                .antMatchers("/rest/emps/remove").hasRole("ADMIN")
-                .antMatchers("/rest/emps/release-from-manager").hasRole("ADMIN")
-                .antMatchers("/rest/emps/assign-manager/*").hasRole("ADMIN")
-                .antMatchers("/rest/results/by-manager/*").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/rest/factors/manage/**").hasRole("ADMIN")
-                .antMatchers("/rest/stats/all-relev-pairs").hasRole("ADMIN")
+                .antMatchers("/v1/auth/login", "/v1/auth/register").permitAll()
+                .antMatchers("/v1/emps/by-manager/*").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/v1/emps/search").hasRole("ADMIN")
+                .antMatchers("/v1/emps/managers").hasRole("ADMIN")
+                .antMatchers("/v1/emps/without-manager").hasRole("ADMIN")
+                .antMatchers("/v1/emps/change-role").hasRole("ADMIN")
+                .antMatchers("/v1/emps/remove/*").hasRole("ADMIN")
+                .antMatchers("/v1/emps/release-from-manager").hasRole("ADMIN")
+                .antMatchers("/v1/emps/assign-manager/*").hasRole("ADMIN")
+                .antMatchers("/v1/emps/by-manager/*/results/relevant").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/v1/factors/active").hasAnyRole("SPECIALIST", "MANAGER", "ADMIN")
+                .antMatchers("/v1/factors", "/v1/factors/change-status").hasRole("ADMIN")
+                .antMatchers("/v1/estim-pairs/relevant").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
             .and().cors().configurationSource(corsConfigurationSource())
@@ -70,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         config.applyPermitDefaultValues();
         config.setAllowedOrigins(Collections.singletonList(this.frontendAppOrigin));
-        config.setAllowedMethods(Arrays.asList("GET", "POST"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         source.registerCorsConfiguration("/**", config);
         return source;
     }
