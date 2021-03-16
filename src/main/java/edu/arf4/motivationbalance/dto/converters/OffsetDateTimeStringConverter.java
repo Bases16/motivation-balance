@@ -6,7 +6,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class OffsetDateTimeStringConverter extends StdConverter<OffsetDateTime, String> {
-    static final String DATETIME_FORMAT = "MM-dd-yyyy-HH:mm";
+    static final String DATETIME_FORMAT = "MM-dd-yyyy-HH:mmx";
 
     @Override
     public String convert(OffsetDateTime offsetDateTime) {
